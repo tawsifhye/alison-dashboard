@@ -1,0 +1,30 @@
+.alinson_logo {
+    width: 20%;
+}
+
+.alinson_logo::after {
+    width: 128px;
+    bottom: 6px;
+    text-transform: uppercase;
+    padding: 15px 24px;
+    position: absolute;
+    content: "Empower Yourself";
+    color: #465159;
+    font-size: 10px;
+    left: 0;
+    letter-spacing: 1.2px;
+}
+
+/* 
+.progressbar::before {
+    width: 128px;
+    bottom: 6px;
+    text-transform: uppercase;
+    padding: 15px 24px;
+    position: absolute;
+    content: "U Yourself";
+    color: #465159;
+    font-size: 10px;
+    left: 0;
+    letter-spacing: 1.2px;
+} */
