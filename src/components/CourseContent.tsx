@@ -19,7 +19,8 @@ const CourseContent = () => {
                 position: 'relative',
                 zIndex: 100,
                 background: '#fff',
-                boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px'
+                boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+                mb: 5
             }}>
 
                 <Box
