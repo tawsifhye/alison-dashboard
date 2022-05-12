@@ -17,6 +17,7 @@ import Divider from '@mui/material/Divider';
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ProgressBar from './ProgressBar';
+import { height } from '@mui/system';
 
 const StyledMenu = styled((props: any) => (
 
@@ -67,6 +68,7 @@ const StyledMenu = styled((props: any) => (
 const Navbar = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [label, setLabel] = React.useState("");
+    const [openSideBar, setOpenSideBar] = React.useState(false);
     const open = Boolean(anchorEl);
     const handleClick = (event: any) => {
         setAnchorEl(event.currentTarget);
@@ -74,6 +76,15 @@ const Navbar = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const openSubMenu = () => {
+        setOpenSideBar(true);
+    }
+
+    React.useEffect(() => {
+
+        setOpenSideBar(false);
+    }, [])
 
     return (
         <AppBar position="sticky">
@@ -119,24 +130,24 @@ const Navbar = () => {
                         anchorEl={anchorEl}
                         open={open}
                         onClose={handleClose}
+                        sx={{
+                            position: 'relative',
+                            height: '500px'
+                        }}
                     >
-                        <MenuItem onClick={handleClose} disableRipple>
-                            Edit
-                        </MenuItem>
-                        <MenuItem onClick={handleClose} disableRipple>
-                            Duplicate
-                        </MenuItem>
-                        <Divider sx={{ my: 0.5 }} />
-                        <MenuItem onClick={handleClose} disableRipple>
-                            Archive
-                        </MenuItem>
-                        <MenuItem onClick={handleClose} disableRipple>
-                            More
+                        <MenuItem onClick={handleClose} onMouseOver={openSubMenu} disableRipple className={Styles.sub_dropdown}>
+                            Module 1: Preventive Maintenance
+                            <ul id="sub-dropdown-menu" className={Styles.sub_dropdown_menu}>
+                                <li>Topic A</li>
+                                <li>Topic A Demo 1</li>
+                                <li>Review Quiz</li>
+                            </ul>
                         </MenuItem>
                     </StyledMenu>
-                    <Typography sx={{ color: 'black' }}>Module Progress</Typography>
-                    <Box component='span' sx={{ color: 'black' }}> % Complete</Box>
+
                     <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
+                        <Typography sx={{ color: 'black', marginLeft: 'auto' }}></Typography>
+                        <Box component='span' sx={{ color: 'black' }}>  0% Complete</Box>
                         <ProgressBar bgcolor='#83C124' progress='50' />
                         <AccountCircleRoundedIcon sx={{ color: '#374651' }} />
                     </Box>
