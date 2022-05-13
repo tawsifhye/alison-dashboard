@@ -6,7 +6,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Box } from '@mui/system';
 const CourseContent = () => {
     return (
-        <>
+        <Box sx={{ backgroundColor: 'red', position: 'relative', }}>
             <Box sx={{
                 minWidth: 275,
                 maxWidth: 800,
@@ -17,34 +17,27 @@ const CourseContent = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 position: 'relative',
-                zIndex: 100,
                 background: '#fff',
+                zIndex: 100,
+                // overflow: 'hidden',
                 boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
                 mb: 5
             }}>
 
-                <Box
-                    sx={{
-                        position: 'absolute',
-                        left: '-40px',
-                        background: '#00bcff',
-                        color: '#fff',
-                        height: '60%',
-                        width: '50px',
-                        fontSize: '22px',
-                        cursor: 'pointer',
-                        pointerEvents: 'all',
-                        borderRadius: '100%',
-                        overflow: 'hidden',
-                        zIndex: '-20 !important',
-                        display: 'flex',
-                        alignItems: 'center'
 
-                    }}
-                >
 
-                    <ArrowBackIosNewIcon />
-                </Box>
+                <ArrowBackIosNewIcon sx={{
+                    position: 'absolute',
+                    left: '-40px',
+                    background: '#00bcff',
+                    color: '#fff',
+                    height: '60%',
+                    width: '50px',
+                    fontSize: '22px',
+                    cursor: 'pointer',
+                    borderRadius: '100%',
+                }} />
+
                 <ReactPlayer
                     url='https://www.youtube.com/watch?v=ysz5S6PUM-U'
                     controls={true}
@@ -63,14 +56,13 @@ const CourseContent = () => {
                         cursor: 'pointer',
                         pointerEvents: 'all',
                         borderRadius: '100%',
-                        overflow: 'hidden',
-                        zIndex: '-20 !important',
+                        overflow: 'hidden !important',
 
                     }}
                 />
             </Box>
 
-        </>
+        </Box>
     );
 };
 

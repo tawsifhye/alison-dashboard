@@ -18,6 +18,7 @@ import Divider from '@mui/material/Divider';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ProgressBar from './ProgressBar';
 import { height } from '@mui/system';
+import { ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 
 const StyledMenu = styled((props: any) => (
 
@@ -66,6 +67,31 @@ const StyledMenu = styled((props: any) => (
 
 
 const Navbar = () => {
+
+    const menuItems = [
+        // ...
+        {
+            title: "web development",
+            submenu: [
+                {
+                    title: "Frontend",
+                },
+                {
+                    title: "Backend",
+                    submenu: [
+                        {
+                            title: "NodeJS",
+                        },
+                        {
+                            title: "PHP",
+                        },
+                    ],
+                },
+            ],
+        },
+        // ...
+    ];
+
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [label, setLabel] = React.useState("");
     const [openSideBar, setOpenSideBar] = React.useState(false);
@@ -106,7 +132,7 @@ const Navbar = () => {
                         <Image src='/assets/images/logo.svg' alt='logo' height='100px' width='100px' />
                     </Box>
 
-                    <Button
+                    {/* <Button
                         id="demo-customized-button"
                         aria-controls={open ? 'demo-customized-menu' : undefined}
                         aria-haspopup="true"
@@ -143,7 +169,7 @@ const Navbar = () => {
                                 <li>Review Quiz</li>
                             </ul>
                         </MenuItem>
-                    </StyledMenu>
+                    </StyledMenu> */}
 
                     <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
                         <Typography sx={{ color: 'black', marginLeft: 'auto' }}></Typography>
