@@ -4,6 +4,9 @@ import { QuizProps } from 'pages/quiz';
 import React, { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import DoneIcon from '@mui/icons-material/Done';
+import { useDispatch } from 'react-redux';
+import { submitAnswer } from 'redux/actions/quizAction';
+import { useRouter } from 'next/router';
 const Styles = {
     button: {
         backgroundColor: '#547B9B',
@@ -36,7 +39,8 @@ const QuizIndex = (props: QuizProps) => {
     const [index, setIndex] = useState<number>(0);
     const [selectedId, setSelectedId] = useState<string>('');
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-
+    const dispatch = useDispatch();
+    const router = useRouter();
     const selectQuizOption = (id: string) => {
         setSelectedId(id);
     }
@@ -45,6 +49,13 @@ const QuizIndex = (props: QuizProps) => {
             return;
         }
         setIsSubmitted(true);
+        const answer = {
+            questionId: id,
+            selectedAnswer: selectedId,
+            rightAnswer,
+        }
+        dispatch(submitAnswer(answer));
+
     }
     const goNext = () => {
         if (!isSubmitted)
@@ -54,7 +65,8 @@ const QuizIndex = (props: QuizProps) => {
         setIndex(index + 1);
     }
     const showQuizResult = () => {
-        console.log("Yay Quiz Submitted");
+        if (isSubmitted)
+            router.push('/quiz/result');
     }
     return (
         <Box sx={{

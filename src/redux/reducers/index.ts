@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import { quizReducer } from "./quizReducer";
 
 const reducers = combineReducers({
-  answer: quizReducer,
+  answers: quizReducer,
 });
 
 export default reducers;
