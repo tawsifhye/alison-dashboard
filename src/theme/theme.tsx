@@ -7,3 +7,7 @@ console.log(theme)
 theme.typography.h6 = {
     // fontSize: '5rem'
 }
+
+theme.typography.h3 = {
+
+}
