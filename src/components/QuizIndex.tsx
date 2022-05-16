@@ -40,9 +40,11 @@ const QuizIndex = (props: QuizProps) => {
     const selectQuizOption = (id: string) => {
         setSelectedId(id);
     }
-    const submitQuiz = (id: string) => {
-
-        selectedId ? setIsSubmitted(true) : '';
+    const submitQuiz = (id: string, rightAnswer: string) => {
+        if (!selectedId) {
+            return;
+        }
+        setIsSubmitted(true);
     }
     const goNext = () => {
         if (!isSubmitted)
@@ -192,7 +194,7 @@ const QuizIndex = (props: QuizProps) => {
                     <Button variant='contained'
                         disableRipple
                         sx={{ ...Styles.button, margin: '0 auto' }}
-                        onClick={() => submitQuiz(quizzes[index].id)}
+                        onClick={() => submitQuiz(quizzes[index].id, quizzes[index].right_answer)}
                     >
                         Submit Answer
                     </Button>
