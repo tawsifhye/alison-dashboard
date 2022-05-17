@@ -11,3 +11,9 @@ export interface Quiz {
     right_answer: string,
     level: string
 }
+
+export interface SubmittedAnswer {
+    questionId: string;
+    selectedAnswer: string;
+    rightAnswer: string;
+}

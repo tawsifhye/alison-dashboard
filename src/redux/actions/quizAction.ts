@@ -1,8 +1,5 @@
-export interface SubmittedAnswer {
-    questionId: string;
-    selectedAnswer: string;
-    rightAnswer: string;
-}
+import { SubmittedAnswer } from "interface/interface";
+
 
 export const submitAnswer = (payload: SubmittedAnswer) => {
     return {

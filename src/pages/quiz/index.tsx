@@ -26,6 +26,7 @@ export async function getStaticProps() {
     return {
         props: {
             quizzes: quizzes.slice(10)
-        }
+        },
+        revalidate: 10,
     }
 }

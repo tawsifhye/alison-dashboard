@@ -13,3 +13,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.success-failure-icon {
+  position: absolute !important;
+  top: -20px !important;
+  right: 0 !important;
+}
