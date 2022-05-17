@@ -1,4 +1,4 @@
-import { Button, Typography } from '@mui/material';
+import { Button, Tooltip, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { QuizProps } from 'pages/quiz';
 import React, { useState } from 'react';
@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { submitAnswer } from 'redux/actions/quizAction';
 import { useRouter } from 'next/router';
 import { primaryButton } from 'styles/commonStyles';
+import Image from 'next/image';
 const Styles = {
     icon: {
         color: '#fff',
@@ -93,7 +94,7 @@ const QuizIndex = (props: QuizProps) => {
                 }}>
 
                     <Typography variant="h3" sx={{
-                        color: '#3f4a52 !important',
+                        color: '#3f4a52',
                         lineHeight: '26px',
                         textAlign: 'left',
                         fontWeight: 400,
@@ -107,12 +108,20 @@ const QuizIndex = (props: QuizProps) => {
                         borderRadius: '30px',
                         border: 'none',
                         maxWidth: '700px',
-                        margin: '0 auto 25px',
+                        margin: '25px auto ',
                         padding: '20px 20px 10px',
                         position: 'relative',
                         zIndex: 2
                     }}>
-
+                        <Tooltip title="Choose one answer.">
+                            <Box component='span' sx={{
+                                position: 'absolute',
+                                top: -20,
+                                right: 0
+                            }}>
+                                <Image src='/assets/images/questionMark.png' alt='' height='35px' width='35px' />
+                            </Box>
+                        </Tooltip>
                         {
                             quizzes[index].options.map((option) => (
                                 <Box
