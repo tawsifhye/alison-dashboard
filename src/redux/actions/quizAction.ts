@@ -7,3 +7,9 @@ export const submitAnswer = (payload: SubmittedAnswer) => {
       payload,
     };
   };
+export const showResult = (payload:boolean) => {
+    return {
+      type: "SHOW_RESULT",
+      payload,
+    };
+  };

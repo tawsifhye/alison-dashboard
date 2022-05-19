@@ -13,6 +13,7 @@ export interface Quiz {
 }
 
 export interface SubmittedAnswer {
+    moduleId?: any;
     questionId: string;
     selectedAnswer: string;
     rightAnswer: string;

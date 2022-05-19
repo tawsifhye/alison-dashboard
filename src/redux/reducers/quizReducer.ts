@@ -1,10 +1,12 @@
+
 const initialState = {
-    submittedAnswer: []
+    submittedAnswer: [],
+    showResult: false,
 }
 
 interface Action {
     type: string;
-    payload: {};
+    payload: {}| boolean;
 }
 
 
@@ -14,6 +16,11 @@ export const quizReducer = (state = initialState, action:Action) => {
         return {
           ...state,
           submittedAnswer: [...state.submittedAnswer, action.payload]
+        };
+      case "SHOW_RESULT":
+        return {
+          ...state,
+          showResult: action.payload,
         };
       
       default:

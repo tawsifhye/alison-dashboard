@@ -1,10 +1,11 @@
 import { Button, Typography } from '@mui/material';
-import { Box, positions, textAlign } from '@mui/system';
+import { Box } from '@mui/system';
 import { SubmittedAnswer } from 'interface/interface';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { showResult } from 'redux/actions/quizAction';
 import { State } from 'redux/reducers';
 import { primaryButton } from 'styles/commonStyles';
 
@@ -17,6 +18,7 @@ const ResultPage = () => {
     const { submittedAnswer }: Answer = useSelector((state: State) => state.answers);
     const [percentage, setPercentage] = useState<number>(0);
     const router = useRouter();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         let rightPercentage = 0;
@@ -30,14 +32,13 @@ const ResultPage = () => {
     }, []);
 
     const retakeQuiz = () => {
-        router.push(`/quiz/${submittedAnswer[0]?.moduleId}`);
-
+        console.log('Retake')
     }
 
     const finishQuiz = () => {
-
+        console.log('Finish')
     }
-
+    console.log(retakeQuiz);
     return (
         <>
             <Box sx={{
@@ -216,6 +217,7 @@ const ResultPage = () => {
                             onClick={percentage < 80 ? retakeQuiz : finishQuiz}>
                             {percentage < 80 ? 'Retry' : 'Finish'}
                         </Button>
+
                         <Button sx={{ ...primaryButton }}
                             variant='contained'
                             disableRipple>

@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import DoneIcon from '@mui/icons-material/Done';
 import { useDispatch } from 'react-redux';
-import { submitAnswer } from 'redux/actions/quizAction';
+import { showResult, submitAnswer } from 'redux/actions/quizAction';
 import { useRouter } from 'next/router';
 import { primaryButton } from 'styles/commonStyles';
 import Image from 'next/image';
@@ -27,6 +27,7 @@ interface Quizzes {
 }
 interface Props {
     quiz: SubMenu;
+    // setIsShowResult: (showResult: boolean) => void;
 }
 
 const QuizIndex = ({ quiz }: Props) => {
@@ -34,8 +35,10 @@ const QuizIndex = ({ quiz }: Props) => {
     const [index, setIndex] = useState<number>(0);
     const [selectedId, setSelectedId] = useState<string>('');
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+
     const dispatch = useDispatch();
     const router = useRouter();
+    // console.log(router.query.id)
     const selectQuizOption = (id: string) => {
         setSelectedId(id);
     }
@@ -45,6 +48,7 @@ const QuizIndex = ({ quiz }: Props) => {
         }
         setIsSubmitted(true);
         const answer = {
+            moduleId: router.query.id,
             questionId: id,
             selectedAnswer: selectedId,
             rightAnswer,
@@ -60,8 +64,10 @@ const QuizIndex = ({ quiz }: Props) => {
         setIndex(index + 1);
     }
     const showQuizResult = () => {
-        if (isSubmitted)
-            router.push('/quiz/result');
+        if (isSubmitted) {
+            dispatch(showResult(true))
+        }
+        // router.push('/quiz/result');
     }
     return (
         <>
