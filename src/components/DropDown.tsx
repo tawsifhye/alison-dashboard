@@ -53,50 +53,13 @@ const StyledMenu = styled((props: any) => (
 }));
 
 
-const menuItems = [
-    // ...
-    {
-        id: "1",
-        title: "Module 1: Preventive Maintenance",
-        submenu: [
-            {
-                title: "Topic A",
-                videoUrl: "https://youtu.be/TsDsE9fePLk",
-            },
-            {
-                title: "Topic A - Demo 1 -Preventive Maintenance",
-                videoUrl: "https://www.youtube.com/watch?v=cwP1vTqVaR4"
-            },
-        ],
-    },
-    {
-        id: "2",
-        title: "Programming",
-        submenu: [
-            {
-                title: "C",
-            },
-            {
-                title: "JAVA",
-            },
-            {
-                title: "C++",
-            },
-        ],
-    },
-    // ...
-];
-
-
-
-
 
 const DropDown = () => {
     const [anchorEl, setAnchorEl] = useState(null);
-    const [showSideMenu, setShowSideMenu] = useState<boolean>(false);
+    // const [showSideMenu, setShowSideMenu] = useState<boolean>(false);
     const [selectedMenuId, setSelectedMenuId] = useState<string>("");
-    const [menuLabel, setMenuLabel] = useState<string>(menuItems[0].title);
     const [moduleData, setModuleData] = useState<Data[]>([]);
+    const [menuLabel, setMenuLabel] = useState<string>('');
     const open = Boolean(anchorEl);
     const handleClick = (event: any) => {
         setAnchorEl(event.currentTarget);
@@ -107,16 +70,14 @@ const DropDown = () => {
 
     const showSubMenu = (id: string) => {
         setSelectedMenuId(id);
-        setShowSideMenu(true);
     }
-
     useEffect(() => {
         fetch('/fakeData.json')
             .then(res => res.json())
             .then(data => setModuleData(data))
-    }, [])
 
-    // console.log(moduleData);
+
+    }, [])
     return (
         <>
             <Button
@@ -137,7 +98,7 @@ const DropDown = () => {
                 onClick={handleClick}
                 startIcon={<KeyboardArrowDownIcon />}
             >
-                {menuLabel}
+                {!menuLabel ? moduleData[0]?.title : menuLabel}
             </Button>
             <StyledMenu
                 id="demo-customized-menu"
@@ -183,8 +144,6 @@ const DropDown = () => {
 
                     ))
                 }
-
-
             </StyledMenu>
         </>
     );

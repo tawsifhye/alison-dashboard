@@ -9,12 +9,17 @@ import Styles from '../styles/Navbar.module.css';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import ProgressBar from './ProgressBar';
 import DropDown from './DropDown';
+import { useRouter } from 'next/router';
 
 
 
 const Navbar = () => {
 
+    const router = useRouter();
 
+    const goHome = () => {
+        router.push('/')
+    }
     return (
         <AppBar position="sticky">
             <Container maxWidth="xl">
@@ -31,13 +36,19 @@ const Navbar = () => {
                     justifyContent: 'space-between',
                     alignItems: 'center'
                 }}>
-                    <Box className={Styles.alinson_logo} >
+
+                    <Box className={Styles.alinson_logo} onClick={goHome} >
                         <Image src='/assets/images/logo.svg' alt='logo' height='100px' width='100px' />
                     </Box>
 
                     <DropDown />
 
-                    <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
+                    <Box sx={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginLeft: 'auto'
+                    }}>
                         <Typography sx={{ color: 'black', marginLeft: 'auto' }}></Typography>
                         <Box component='span' sx={{ color: 'black' }}>  0% Complete</Box>
                         <ProgressBar bgcolor='#83C124' progress='50' />

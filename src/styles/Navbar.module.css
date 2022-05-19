@@ -1,5 +1,6 @@
 .alinson_logo {
     width: 20%;
+    cursor: pointer;
 }
 
 .alinson_logo::after {
