@@ -1,6 +1,7 @@
 import { Button, Tooltip, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { QuizProps } from 'pages/quiz';
+import { Quiz, Option, SubMenu } from 'interface/interface';
 import React, { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import DoneIcon from '@mui/icons-material/Done';
@@ -21,8 +22,15 @@ const Styles = {
     }
 }
 
-const QuizIndex = (props: QuizProps) => {
-    const { quizzes } = props;
+interface Quizzes {
+    quizzes: Quiz[];
+}
+interface Props {
+    quiz: SubMenu;
+}
+
+const QuizIndex = ({ quiz }: Props) => {
+    const { quizzes }: any = quiz;
     const [index, setIndex] = useState<number>(0);
     const [selectedId, setSelectedId] = useState<string>('');
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -123,7 +131,7 @@ const QuizIndex = (props: QuizProps) => {
                             </Box>
                         </Tooltip>
                         {
-                            quizzes[index].options.map((option) => (
+                            quizzes[index]?.options.map((option: Option) => (
                                 <Box
                                     key={option.id}
                                     sx={{

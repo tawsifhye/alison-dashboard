@@ -17,3 +17,18 @@ export interface SubmittedAnswer {
     selectedAnswer: string;
     rightAnswer: string;
 }
+
+
+export interface SubMenu {
+    type: string;
+    title: string;
+    videoUrl?: string;
+    quizzes?: Quiz[]
+}
+
+
+export interface Data {
+    id: string;
+    title: string;
+    submenu: SubMenu[];
+}

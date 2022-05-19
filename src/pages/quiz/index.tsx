@@ -10,7 +10,7 @@ export interface QuizProps {
 const QuizHome = (props: QuizProps) => {
     return (
         <>
-            <QuizIndex quizzes={props.quizzes} />
+            {/* <QuizIndex quizzes={props.quizzes} /> */}
         </>
     );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
@@ -6,6 +6,10 @@ import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';;
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { Box } from '@mui/system';
+import { Typography } from '@mui/material';
+import { Data } from 'interface/interface';
+import Link from 'next/link';
 
 
 const StyledMenu = styled((props: any) => (
@@ -53,13 +57,30 @@ const menuItems = [
     // ...
     {
         id: "1",
-        title: "web development",
+        title: "Module 1: Preventive Maintenance",
         submenu: [
             {
-                title: "Frontend",
+                title: "Topic A",
+                videoUrl: "https://youtu.be/TsDsE9fePLk",
             },
             {
-                title: "Backend",
+                title: "Topic A - Demo 1 -Preventive Maintenance",
+                videoUrl: "https://www.youtube.com/watch?v=cwP1vTqVaR4"
+            },
+        ],
+    },
+    {
+        id: "2",
+        title: "Programming",
+        submenu: [
+            {
+                title: "C",
+            },
+            {
+                title: "JAVA",
+            },
+            {
+                title: "C++",
             },
         ],
     },
@@ -73,6 +94,9 @@ const menuItems = [
 const DropDown = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [showSideMenu, setShowSideMenu] = useState<boolean>(false);
+    const [selectedMenuId, setSelectedMenuId] = useState<string>("");
+    const [menuLabel, setMenuLabel] = useState<string>(menuItems[0].title);
+    const [moduleData, setModuleData] = useState<Data[]>([]);
     const open = Boolean(anchorEl);
     const handleClick = (event: any) => {
         setAnchorEl(event.currentTarget);
@@ -82,8 +106,17 @@ const DropDown = () => {
     };
 
     const showSubMenu = (id: string) => {
+        setSelectedMenuId(id);
         setShowSideMenu(true);
     }
+
+    useEffect(() => {
+        fetch('/fakeData.json')
+            .then(res => res.json())
+            .then(data => setModuleData(data))
+    }, [])
+
+    // console.log(moduleData);
     return (
         <>
             <Button
@@ -104,7 +137,7 @@ const DropDown = () => {
                 onClick={handleClick}
                 startIcon={<KeyboardArrowDownIcon />}
             >
-                Options
+                {menuLabel}
             </Button>
             <StyledMenu
                 id="demo-customized-menu"
@@ -116,15 +149,41 @@ const DropDown = () => {
                 onClose={handleClose}
             >
                 {
-                    menuItems.map(item => (
-                        <MenuItem key={item.title} onMouseOver={() => showSubMenu(item.id)} disableRipple>
+                    moduleData.map(item => (
+                        <MenuItem sx={{ width: '100%' }} key={item.title} onMouseOver={() => showSubMenu(item.id)}
+                            onMouseLeave={() => showSubMenu('')} disableRipple>
                             {item.title} <ChevronRightIcon />
+                            {item.id === selectedMenuId && < Box
+                                sx={{
+                                    background: '#fff',
+                                    position: 'fixed',
+                                    width: 'auto',
+                                    padding: 0,
+                                    // left: '350px',
+                                    left: 'calc(20% + 150px)',
+                                    top: '72px',
+                                    minHeight: 'auto',
+                                    borderLeft: '1px solid #f4f5f7',
+                                    // box-shadow: 0 3px 8px 0 #323232;
+                                    boxShadow: '0 3px 8px 0 rgb(50 50 50 / 20%)'
+                                }}
+                            >
+                                {item.submenu.map(menu => (
+                                    <MenuItem key={menu.title} onClick={() => setMenuLabel(item.title)} >
+                                        <Box component='span'>
+                                            <Link href={menu.type === 'quiz' ? `/quiz/${item.id}` : ''}>
+                                                {menu.title}
+                                            </Link>
+                                        </Box>
+                                    </MenuItem>
+                                ))}
+                            </Box>
+                            }
                         </MenuItem>
 
                     ))
                 }
 
-                <StyledMenu></StyledMenu>
 
             </StyledMenu>
         </>
