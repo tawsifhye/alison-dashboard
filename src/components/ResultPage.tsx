@@ -32,15 +32,20 @@ const ResultPage = () => {
     }, []);
 
     const retakeQuiz = () => {
-        console.log('Retake')
+        window.location.reload();
     }
 
     const finishQuiz = () => {
         console.log('Finish')
     }
-    console.log(retakeQuiz);
+
+
+    const test = () => {
+        console.log('Result');
+    }
     return (
         <>
+
             <Box sx={{
                 minWidth: 275,
                 maxWidth: 800,
@@ -63,6 +68,7 @@ const ResultPage = () => {
                     margin: '0 auto',
                     textAlign: 'center'
                 }}>
+                    <p onClick={test}>Result</p>
                     <Typography sx={{
                         color: '#3f4a52',
                         fontSize: '30px',

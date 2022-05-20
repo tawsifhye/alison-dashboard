@@ -27,10 +27,10 @@ interface Quizzes {
 }
 interface Props {
     quiz: SubMenu;
-    // setIsShowResult: (showResult: boolean) => void;
+    setShowResult: (showResult: boolean) => void;
 }
 
-const QuizIndex = ({ quiz }: Props) => {
+const QuizIndex = ({ quiz, setShowResult }: Props) => {
     const { quizzes }: any = quiz;
     const [index, setIndex] = useState<number>(0);
     const [selectedId, setSelectedId] = useState<string>('');
@@ -65,9 +65,9 @@ const QuizIndex = ({ quiz }: Props) => {
     }
     const showQuizResult = () => {
         if (isSubmitted) {
-            dispatch(showResult(true))
+            setShowResult(true);
         }
-        // router.push('/quiz/result');
+
     }
     return (
         <>

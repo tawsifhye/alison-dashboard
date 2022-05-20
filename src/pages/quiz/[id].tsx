@@ -4,7 +4,7 @@ import { Data, Quiz, SubMenu } from 'interface/interface';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { State } from 'redux/reducers';
-import ResultPage from './result';
+import ResultPage from '../../components/ResultPage';
 
 interface Props {
     quiz: SubMenu;
@@ -19,17 +19,17 @@ interface Params {
 
 const ModuleQuiz = ({ quiz }: Props) => {
 
-    // const [showResult, setShowResult] = useState<boolean>(false);
-    const { showResult } = useSelector((state: State) => state.answers)
-    console.log(showResult)
+    const [showResult, setShowResult] = useState<boolean>(false);
+    // const { showResult } = useSelector((state: State) => state.answers)
+
     return (
         <Box>
-            {
 
+            {
 
                 showResult ? <ResultPage />
                     :
-                    <QuizIndex quiz={quiz} />
+                    <QuizIndex quiz={quiz} setShowResult={setShowResult} />
 
             }
         </Box>
