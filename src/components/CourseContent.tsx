@@ -1,11 +1,28 @@
 import { Card, CardContent, Paper, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Box } from '@mui/system';
+import { useSelector } from 'react-redux';
+import { State } from 'redux/reducers';
+import { Data } from 'interface/interface';
 const CourseContent = () => {
+    const { moduleId, moduleResourceIndex } = useSelector((state: State) => state.moduleInfo);
+    const [moduleData, setModuleData] = useState<Data[]>([]);
+    const [currentModule, setCurrentModule] = useState<Data>();
+    useEffect(() => {
+        fetch('/fakeData.json')
+            .then(res => res.json())
+            .then(data => setModuleData(data));
+    }, [moduleId, moduleResourceIndex]);
 
+    useEffect(() => {
+        const filterModule = moduleData.find((data) => data.id === moduleId);
+        setCurrentModule(filterModule);
+        console.log(filterModule);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [moduleData])
     return (
         <Box sx={{ backgroundColor: 'red', position: 'relative', }}>
             <Box sx={{
@@ -41,7 +58,7 @@ const CourseContent = () => {
                 }} />
 
                 <ReactPlayer
-                    url='https://www.youtube.com/watch?v=ysz5S6PUM-U'
+                    url={currentModule?.submenu[moduleResourceIndex].videoUrl}
                     controls={true}
                     width={700}
                     height={500}

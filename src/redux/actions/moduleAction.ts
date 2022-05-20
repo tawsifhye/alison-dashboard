@@ -4,3 +4,9 @@ export const getSelectedModule =(payload: string)=>{
         payload
     }
 }
+export const getSelectedModuleItem =(payload: number)=>{
+    return{
+        type: 'SELECT_INDEX',
+        payload
+    }
+}

@@ -1,5 +1,6 @@
 const initialState = {
     moduleId: '1',
+    moduleResourceIndex: 0,
 }
 
 interface Action {
@@ -13,6 +14,13 @@ export const moduleReducer = (state=initialState ,action:Action)=>{
             return{
                 ...state,
                 moduleId: action.payload
+            }
+        }
+
+        case 'SELECT_INDEX':{
+            return{
+                ...state,
+                moduleResourceIndex: action.payload
             }
         }
         default:

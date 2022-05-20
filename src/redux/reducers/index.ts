@@ -4,7 +4,7 @@ import { quizReducer } from "./quizReducer";
 
 const reducers = combineReducers({
   answers: quizReducer,
-  moduleId: moduleReducer
+  moduleInfo: moduleReducer
 });
 
 export default reducers;

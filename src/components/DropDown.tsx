@@ -3,13 +3,13 @@ import { styled, alpha } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Divider from '@mui/material/Divider';;
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Box } from '@mui/system';
-import { Typography } from '@mui/material';
 import { Data } from 'interface/interface';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { getSelectedModule, getSelectedModuleItem } from 'redux/actions/moduleAction';
 
 
 const StyledMenu = styled((props: any) => (
@@ -56,10 +56,10 @@ const StyledMenu = styled((props: any) => (
 
 const DropDown = () => {
     const [anchorEl, setAnchorEl] = useState(null);
-    // const [showSideMenu, setShowSideMenu] = useState<boolean>(false);
     const [selectedMenuId, setSelectedMenuId] = useState<string>("");
     const [moduleData, setModuleData] = useState<Data[]>([]);
     const [menuLabel, setMenuLabel] = useState<string>('');
+    const dispatch = useDispatch()
     const open = Boolean(anchorEl);
     const handleClick = (event: any) => {
         setAnchorEl(event.currentTarget);
@@ -70,6 +70,14 @@ const DropDown = () => {
 
     const showSubMenu = (id: string) => {
         setSelectedMenuId(id);
+    }
+
+    const getSelectedModuleId = (label: string, id: string, type: string, index: number) => {
+        if (type !== 'quiz') {
+            setMenuLabel(label);
+            dispatch(getSelectedModule(id));
+            dispatch(getSelectedModuleItem(index));
+        }
     }
     useEffect(() => {
         fetch('/fakeData.json')
@@ -129,8 +137,8 @@ const DropDown = () => {
                                     boxShadow: '0 3px 8px 0 rgb(50 50 50 / 20%)'
                                 }}
                             >
-                                {item.submenu.map(menu => (
-                                    <MenuItem key={menu.title} onClick={() => setMenuLabel(item.title)} >
+                                {item.submenu.map((menu, index) => (
+                                    <MenuItem key={menu.title} onClick={() => getSelectedModuleId(item.title, item.id, menu.type, index)} >
                                         <Box component='span'>
                                             <Link href={menu.type === 'quiz' ? `/quiz/${item.id}` : ''}>
                                                 {menu.title}
