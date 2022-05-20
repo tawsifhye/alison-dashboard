@@ -5,6 +5,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Box } from '@mui/system';
 const CourseContent = () => {
+
     return (
         <Box sx={{ backgroundColor: 'red', position: 'relative', }}>
             <Box sx={{
@@ -32,6 +33,7 @@ const CourseContent = () => {
                     background: '#00bcff',
                     color: '#fff',
                     height: '60%',
+                    zIndex: 10,
                     width: '50px',
                     fontSize: '22px',
                     cursor: 'pointer',
