@@ -28,11 +28,11 @@ const StyledMenu = styled((props: any) => (
 ))(({ theme }) => ({
     '& .MuiPaper-root': {
         borderRadius: 6,
-        marginTop: theme.spacing(1),
+        marginTop: theme.spacing(2),
         minWidth: 180,
         color: '#465159',
         boxShadow:
-            'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
+            '',
         '& .MuiMenu-list': {
             padding: '4px 0',
         },
@@ -40,7 +40,7 @@ const StyledMenu = styled((props: any) => (
             '& .MuiSvgIcon-root': {
                 fontSize: 18,
                 color: theme.palette.text.secondary,
-                marginRight: theme.spacing(1.5),
+                marginLeft: theme.spacing(20),
             },
             '&:active': {
                 backgroundColor: alpha(
@@ -98,6 +98,7 @@ const DropDown = () => {
                 sx={{
                     background: '#fff',
                     color: '#465159',
+                    width: '100%',
                     '&:hover': {
                         background: 'transparent'
                     }
@@ -130,7 +131,7 @@ const DropDown = () => {
                                     width: 'auto',
                                     padding: 0,
                                     // left: '350px',
-                                    left: 'calc(20% + 150px)',
+                                    left: 'calc(20% + 470px)',
                                     top: '72px',
                                     minHeight: 'auto',
                                     borderLeft: '1px solid #f4f5f7',
