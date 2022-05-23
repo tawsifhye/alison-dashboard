@@ -78,6 +78,7 @@ const DropDown = () => {
             dispatch(getSelectedModule(id));
             dispatch(getSelectedModuleItem(index));
         }
+        setAnchorEl(null);
     }
     useEffect(() => {
         fetch('/fakeData.json')
@@ -138,7 +139,8 @@ const DropDown = () => {
                                 }}
                             >
                                 {item.submenu.map((menu, index) => (
-                                    <MenuItem key={menu.title} onClick={() => getSelectedModuleId(item.title, item.id, menu.type, index)} >
+                                    <MenuItem key={menu.title} onClick={() => getSelectedModuleId(item.title, item.id, menu.type, index)
+                                    } >
                                         <Box component='span'>
                                             <Link href={menu.type === 'quiz' ? `/quiz/${item.id}` : '/'}>
                                                 {menu.title}

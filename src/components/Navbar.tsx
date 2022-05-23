@@ -21,7 +21,7 @@ const Navbar = () => {
         router.push('/')
     }
     return (
-        <AppBar position="sticky">
+        <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar sx={{
                     position: "fixed",

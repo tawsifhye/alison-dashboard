@@ -1,4 +1,4 @@
-import { Card, CardContent, Paper, Typography } from '@mui/material';
+import { Button, Card, CardContent, Paper, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -7,6 +7,17 @@ import { Box } from '@mui/system';
 import { useSelector } from 'react-redux';
 import { State } from 'redux/reducers';
 import { Data } from 'interface/interface';
+
+const Styles = {
+    nextPrevButton: {
+        borderRadius: '8px',
+        textAlign: 'center',
+        background: '#00bcff',
+        boxShadow: '0 3px 8px 0 rgb(50 50 50 / 20%)',
+    }
+}
+
+
 const CourseContent = () => {
     const { moduleId, moduleResourceIndex } = useSelector((state: State) => state.moduleInfo);
     const [moduleData, setModuleData] = useState<Data[]>([]);
@@ -24,19 +35,21 @@ const CourseContent = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [moduleData])
     return (
-        <Box sx={{ backgroundColor: 'red', position: 'relative', }}>
+        <Box sx={{ backgroundColor: '', position: 'relative', }}>
             <Box sx={{
-                minWidth: 275,
+                padding: '30px',
                 maxWidth: 800,
-                height: 600,
+                height: 500,
                 mx: 'auto',
                 mt: 15,
-                display: 'flex',
+                display: {
+                    md: 'flex'
+                },
                 justifyContent: 'center',
                 alignItems: 'center',
                 position: 'relative',
                 background: '#fff',
-                zIndex: 100,
+                zIndex: '100 !important',
                 // overflow: 'hidden',
                 boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
                 mb: 5
@@ -46,6 +59,10 @@ const CourseContent = () => {
 
                 <ArrowBackIosNewIcon sx={{
                     position: 'absolute',
+                    display: {
+                        xs: 'none',
+                        md: 'block',
+                    },
                     left: '-40px',
                     background: '#00bcff',
                     color: '#fff',
@@ -60,12 +77,30 @@ const CourseContent = () => {
                 <ReactPlayer
                     url={currentModule?.submenu[moduleResourceIndex].videoUrl}
                     controls={true}
-                    width={700}
-                    height={500}
+                    width='100%'
+                    height='90%'
                 />
+                <Box sx={{ mt: 3, display: { xs: 'flex', md: 'none' }, justifyContent: 'space-between' }}>
+                    <Button variant='contained'
+                        disableRipple
+                        startIcon={<ArrowBackIosNewIcon />}
+                        sx={Styles.nextPrevButton}>
+                        Previous
+                    </Button>
+                    <Button variant='contained'
+                        disableRipple
+                        endIcon={<ArrowForwardIosIcon />}
+                        sx={Styles.nextPrevButton}>
+                        Next
+                    </Button>
+                </Box>
                 <ArrowForwardIosIcon
                     sx={{
                         position: 'absolute',
+                        display: {
+                            xs: 'none',
+                            md: 'block',
+                        },
                         right: '-40px',
                         background: '#00bcff',
                         color: '#fff',
@@ -75,12 +110,12 @@ const CourseContent = () => {
                         cursor: 'pointer',
                         pointerEvents: 'all',
                         borderRadius: '100%',
-                        overflow: 'hidden !important',
+                        zIndex: 1
 
                     }}
                 />
-            </Box>
 
+            </Box>
         </Box>
     );
 };
