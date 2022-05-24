@@ -43,3 +43,11 @@
 .sub_dropdown:hover .sub_dropdown_menu {
     display: block;
 }
+
+
+@media only screen and (max-width: 975px) {
+    .alinson_logo::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
