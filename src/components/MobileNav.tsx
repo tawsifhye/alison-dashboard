@@ -10,6 +10,7 @@ import Styles from '../styles/Navbar.module.css';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import ProgressBar from './ProgressBar';
 import SearchIcon from '@mui/icons-material/Search';
+import MobileDropDown from './MobileDropDown';
 
 
 const MobileNav = () => {
@@ -51,7 +52,7 @@ const MobileNav = () => {
                 alignItems: 'center',
                 marginTop: 2
             }}>
-
+                <MobileDropDown />
             </Box>
 
         </>

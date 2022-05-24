@@ -31,7 +31,6 @@ const CourseContent = () => {
     useEffect(() => {
         const filterModule = moduleData.find((data) => data.id === moduleId);
         setCurrentModule(filterModule);
-        console.log(filterModule);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [moduleData])
     return (
@@ -114,7 +113,6 @@ const CourseContent = () => {
 
                     }}
                 />
-
             </Box>
         </Box>
     );
