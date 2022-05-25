@@ -41,20 +41,7 @@ const MobileNav = () => {
                 </Box>
                 <AccountCircleRoundedIcon sx={{ color: '#374651' }} />
             </Box>
-
-            <Box sx={{
-                width: "100%",
-                padding: '15px 24px',
-                height: '72px',
-                background: '#fff',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginTop: 2
-            }}>
-                <MobileDropDown />
-            </Box>
-
+            <MobileDropDown />
         </>
     );
 };

@@ -40,9 +40,6 @@ const ResultPage = () => {
     }
 
 
-    const test = () => {
-        console.log('Result');
-    }
     return (
         <>
 
