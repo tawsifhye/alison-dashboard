@@ -31,6 +31,7 @@ export interface Data {
 export interface SubMenu {
     type: string;
     title: string;
+    slug: string;
     videoUrl?: string;
     quizzes?: Quiz[]
 }
