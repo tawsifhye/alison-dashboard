@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <ThemeProvider theme={theme}>
-        {/* <Navbar /> */}
+        <Navbar />
         <MobileNav />
         <Component {...pageProps} />
         <Footer />

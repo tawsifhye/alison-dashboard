@@ -40,6 +40,9 @@ export default function MobileDropDown() {
         <Accordion elevation={0} sx={{
             width: '100%',
             mt: 2,
+            display: {
+                md: 'none',
+            }
 
         }}>
             <AccordionSummary
