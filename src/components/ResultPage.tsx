@@ -65,7 +65,6 @@ const ResultPage = () => {
                     margin: '0 auto',
                     textAlign: 'center'
                 }}>
-                    <p onClick={test}>Result</p>
                     <Typography sx={{
                         color: '#3f4a52',
                         fontSize: '30px',
