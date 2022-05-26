@@ -22,20 +22,7 @@ interface Params {
 }
 
 const CourseContent = ({ videoUrl }: Params) => {
-    const { moduleId, moduleResourceIndex } = useSelector((state: State) => state.moduleInfo);
-    const [moduleData, setModuleData] = useState<Data[]>([]);
-    const [currentModule, setCurrentModule] = useState<Data>();
-    useEffect(() => {
-        fetch('/fakeData.json')
-            .then(res => res.json())
-            .then(data => setModuleData(data));
-    }, [moduleId, moduleResourceIndex]);
 
-    useEffect(() => {
-        const filterModule = moduleData.find((data) => data.id === moduleId);
-        setCurrentModule(filterModule);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [moduleData])
     return (
         <Box sx={{ backgroundColor: '', position: 'relative', }}>
             <Box sx={{
@@ -43,7 +30,7 @@ const CourseContent = ({ videoUrl }: Params) => {
                 maxWidth: 800,
                 height: 500,
                 mx: 'auto',
-                mt: 15,
+                mt: 5,
                 display: {
                     md: 'flex'
                 },

@@ -66,11 +66,15 @@ export default function MobileDropDown() {
                 {
                     moduleData.map(module => (
                         <>
-                            <Accordion expanded={expanded === module.id} onChange={handleChange(module.id)} sx={{
-                                boxShadow: 'none',
-                                padding: 0,
+                            <Accordion
+                                key={module.id}
+                                expanded={expanded === module.id}
+                                onChange={handleChange(module.id)}
+                                sx={{
+                                    boxShadow: 'none',
+                                    padding: 0,
 
-                            }}>
+                                }}>
                                 <AccordionSummary
                                     aria-controls="panel1bh-content"
                                     id="panel1bh-header"

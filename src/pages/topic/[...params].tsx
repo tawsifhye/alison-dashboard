@@ -2,24 +2,25 @@ import CourseContent from 'components/CourseContent';
 import { Data } from 'interface/interface';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import useSWR, { SWRResponse } from 'swr';
 
+interface Fetch {
+    data: SWRResponse<any, any>;
+    error: any;
+}
 
 const Slug = () => {
-    const [moduleData, setModuleData] = useState<Data[]>([]);
     const [currentModule, setCurrentModule] = useState<Data>();
     const [videoUrl, setVideoUrl] = useState<string>();
     const router = useRouter();
     const { params } = router.query;
+    const fetcher = (url: any): any => fetch(url).then(res => res.json())
+    const { data, error } = useSWR<Data[]>('/fakeData.json', fetcher)
 
-    const fetchData = () => {
-        fetch('/fakeData.json')
-            .then(res => res.json())
-            .then(data => setModuleData(data))
-    }
     const filterData = () => {
         if (params) {
-            const data = moduleData.find(data => data.id === params[1]);
-            setCurrentModule(data);
+            const moduleData = data?.find(data => data.id === params[1]);
+            setCurrentModule(moduleData);
         }
     }
 
@@ -31,11 +32,11 @@ const Slug = () => {
     }
 
     useEffect(() => {
-        fetchData();
+
         filterData();
         setUrl();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [moduleData, currentModule])
+    }, [params && params[2], currentModule, videoUrl])
     return (
         <>
             <CourseContent videoUrl={videoUrl} />

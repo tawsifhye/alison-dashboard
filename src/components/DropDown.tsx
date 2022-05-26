@@ -121,7 +121,11 @@ const DropDown = () => {
             >
                 {
                     moduleData.map(item => (
-                        <MenuItem sx={{ width: '100%' }} key={item.title} onMouseOver={() => showSubMenu(item.id)}
+                        <MenuItem
+                            key={item.title}
+                            sx={{ width: '100%' }}
+                            component="div"
+                            onMouseOver={() => showSubMenu(item.id)}
                             onMouseLeave={() => showSubMenu('')} disableRipple>
                             {item.title} <ChevronRightIcon />
                             {item.id === selectedMenuId && < Box
@@ -140,13 +144,13 @@ const DropDown = () => {
                                 }}
                             >
                                 {item.submenu.map((menu, index) => (
-                                    <MenuItem key={menu.title}  >
-                                        <Box component='span'>
-                                            <Link href={menu.type === 'quiz' ? `/quiz/${item.id}` : `/topic/module/${item.id}/${menu.slug}`}>
-                                                {menu.title}
-                                            </Link>
-                                        </Box>
-                                    </MenuItem>
+
+                                    <Link key={menu.title} href={menu.type === 'quiz' ? `/quiz/${item.id}` : `/topic/module/${item.id}/${menu.slug}`}>
+                                        <MenuItem  >
+                                            {menu.title}
+                                        </MenuItem>
+                                    </Link>
+
                                 ))}
                             </Box>
                             }
