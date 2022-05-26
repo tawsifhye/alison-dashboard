@@ -1,13 +1,12 @@
-import { Button, Card, CardContent, Paper, Typography } from '@mui/material';
+import { Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Box } from '@mui/system';
-import { useSelector } from 'react-redux';
-import { State } from 'redux/reducers';
 import { Data } from 'interface/interface';
 import { useRouter } from 'next/router';
+
 
 const Styles = {
     nextPrevButton: {
@@ -23,21 +22,44 @@ interface Params {
 }
 
 const CourseContent = ({ currentModule }: Params) => {
+    const [index, setIndex] = useState<number>(0);
     const [videoUrl, setVideoUrl] = useState<string>();
     const router = useRouter()
     const { params } = router.query;
+
+
+    const goNextPrevious = (type: string) => {
+        if (type === 'decrease') {
+            router.push(`/topic/module/${currentModule?.id}/${currentModule?.submenu[index - 1].slug}`)
+        }
+        if (currentModule?.submenu[index + 1].type === 'video') {
+            setIndex(index + 1);
+            router.push(`/topic/module/${currentModule.id}/${currentModule.submenu[index + 1].slug}`)
+
+        }
+        else if (currentModule?.submenu[index + 1].type === 'quiz') {
+            router.push(`/quiz/${currentModule.id}`);
+        }
+
+    }
 
     useEffect(() => {
         if (params) {
             const lesson = currentModule?.submenu.find(lesson => lesson.slug === params[2]);
             setVideoUrl(lesson?.videoUrl);
+            const index = currentModule?.submenu.findIndex(object => {
+                return object.slug === params[2];
+            });
+            if (typeof (index) === 'number') {
+                setIndex(index);
+            }
         }
     }, [currentModule, params])
 
     return (
         <Box sx={{ backgroundColor: '', position: 'relative', }}>
             <Box sx={{
-                padding: '30px',
+                padding: '0 30px',
                 maxWidth: 800,
                 height: 500,
                 mx: 'auto',
@@ -55,7 +77,7 @@ const CourseContent = ({ currentModule }: Params) => {
 
 
 
-                <ArrowBackIosNewIcon sx={{
+                {index ? <ArrowBackIosNewIcon sx={{
                     position: 'absolute',
                     display: {
                         xs: 'none',
@@ -69,7 +91,11 @@ const CourseContent = ({ currentModule }: Params) => {
                     fontSize: '22px',
                     cursor: 'pointer',
                     borderRadius: '100%',
-                }} />
+                }}
+                    onClick={() => goNextPrevious('decrease')}
+                />
+                    : <></>
+                }
 
                 <ReactPlayer
                     url={videoUrl}
@@ -107,8 +133,8 @@ const CourseContent = ({ currentModule }: Params) => {
                         pointerEvents: 'all',
                         borderRadius: '100%',
                         zIndex: 1
-
                     }}
+                    onClick={() => goNextPrevious('next')}
                 />
             </Box>
         </Box>

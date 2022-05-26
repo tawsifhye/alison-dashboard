@@ -18,7 +18,7 @@ const Navbar = () => {
     const router = useRouter();
 
     const goHome = () => {
-        router.push('/')
+        router.push('/topic/module/1/topic-a')
     }
     return (
         <AppBar sx={{
