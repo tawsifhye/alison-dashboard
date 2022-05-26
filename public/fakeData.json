@@ -18,6 +18,7 @@
          {
             "type":"quiz",
             "title":"Review Quiz",
+            "slug":"topic-a-quiz",
             "quizzes":[
                {
                   "id":"11",

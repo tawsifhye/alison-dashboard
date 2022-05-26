@@ -75,8 +75,8 @@ const DropDown = () => {
     const getSelectedModuleId = (label: string, id: string, type: string, index: number) => {
         if (type !== 'quiz') {
             setMenuLabel(label);
-            dispatch(getSelectedModule(id));
-            dispatch(getSelectedModuleItem(index));
+            // dispatch(getSelectedModule(id));
+            // dispatch(getSelectedModuleItem(index));
         }
         setAnchorEl(null);
     }
@@ -140,10 +140,9 @@ const DropDown = () => {
                                 }}
                             >
                                 {item.submenu.map((menu, index) => (
-                                    <MenuItem key={menu.title} onClick={() => getSelectedModuleId(item.title, item.id, menu.type, index)
-                                    } >
+                                    <MenuItem key={menu.title}  >
                                         <Box component='span'>
-                                            <Link href={menu.type === 'quiz' ? `/quiz/${item.id}` : '/'}>
+                                            <Link href={menu.type === 'quiz' ? `/quiz/${item.id}` : `/topic/module/${menu.slug}`}>
                                                 {menu.title}
                                             </Link>
                                         </Box>
