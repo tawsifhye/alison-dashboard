@@ -23,18 +23,20 @@ export default function MobileDropDown() {
             setExpanded(isExpanded ? panel : false);
         };
     useEffect(() => {
-        fetch('fakeData.json')
+        fetch('/fakeData.json')
             .then(res => res.json())
             .then(data => setModuleData(data))
     }, []);
 
     const getSelectedModuleId = (label: string, id: string, type: string, index: number) => {
+        setExpanded(false);
+        setMenuLabel(label);
         if (type !== 'quiz') {
-            setMenuLabel(label);
             dispatch(getSelectedModule(id));
             dispatch(getSelectedModuleItem(index));
         }
     }
+
 
     return (
         <Accordion elevation={0} sx={{
@@ -78,6 +80,7 @@ export default function MobileDropDown() {
                                 <AccordionSummary
                                     aria-controls="panel1bh-content"
                                     id="panel1bh-header"
+                                    onClick={() => handleChange(module.id)}
                                     sx={{
                                         margin: 0,
                                         padding: '0px !important',
@@ -98,7 +101,7 @@ export default function MobileDropDown() {
                                     {
                                         module?.submenu.map((menu, index) => (
 
-                                            <Link key={menu.title} href={menu.type === 'quiz' ? `/quiz/${module.id}` : '/'}>
+                                            <Link key={menu.title} href={menu.type === 'quiz' ? `/quiz/${module.id}` : `/topic/module/${module.id}/${menu.slug}`}>
                                                 <Typography
                                                     sx={{
                                                         marginLeft: '10px',
@@ -120,14 +123,6 @@ export default function MobileDropDown() {
                                 </AccordionDetails>
                             </Accordion>
                         </>
-                        /*  <Typography key={module.id}
-                             sx={{
-                                 backgroundColor: '#E8E8E8',
-                                 width: '100%',
-                                 padding: '10px'
-                             }}>
-                             {module.title}
-                         </Typography> */
                     ))
                 }
             </AccordionDetails>

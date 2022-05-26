@@ -10,7 +10,8 @@ const Footer = () => {
     return (
         <Box sx={{
             backgroundColor: '#2E3942',
-            position: 'relative'
+            position: 'relative',
+            padding: '20px'
         }}>
             <Box className={Styles.footer_image} sx={{
                 display: {
@@ -22,14 +23,11 @@ const Footer = () => {
                 <Image src='/assets/images/footertriangles.png' alt='helo' width='250px' height='200px' />
             </Box>
             <Container sx={{
-                maxWidth: {
-                    xl: 'xl',
-                    lg: 'lg'
-                },
+
                 padding: '50px 0'
             }}>
 
-                <Grid container spacing={2}>
+                <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
                     <Grid item xs={6} lg={3}>
                         <Typography sx={{
                             display: 'inline-block',

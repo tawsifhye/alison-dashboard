@@ -7,6 +7,7 @@ import { Box } from '@mui/system';
 import { useSelector } from 'react-redux';
 import { State } from 'redux/reducers';
 import { Data } from 'interface/interface';
+import { useRouter } from 'next/router';
 
 const Styles = {
     nextPrevButton: {
@@ -18,10 +19,20 @@ const Styles = {
 }
 
 interface Params {
-    videoUrl?: string | undefined;
+    currentModule?: Data;
 }
 
-const CourseContent = ({ videoUrl }: Params) => {
+const CourseContent = ({ currentModule }: Params) => {
+    const [videoUrl, setVideoUrl] = useState<string>();
+    const router = useRouter()
+    const { params } = router.query;
+
+    useEffect(() => {
+        if (params) {
+            const lesson = currentModule?.submenu.find(lesson => lesson.slug === params[2]);
+            setVideoUrl(lesson?.videoUrl);
+        }
+    }, [currentModule, params])
 
     return (
         <Box sx={{ backgroundColor: '', position: 'relative', }}>
@@ -38,8 +49,6 @@ const CourseContent = ({ videoUrl }: Params) => {
                 alignItems: 'center',
                 position: 'relative',
                 background: '#fff',
-                zIndex: '100 !important',
-                // overflow: 'hidden',
                 boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
                 mb: 5
             }}>
@@ -53,11 +62,10 @@ const CourseContent = ({ videoUrl }: Params) => {
                         md: 'block',
                     },
                     left: '-40px',
-                    background: '#00bcff',
+                    background: '#374651',
                     color: '#fff',
-                    height: '60%',
-                    zIndex: 10,
-                    width: '50px',
+                    height: '30px',
+                    width: '30px',
                     fontSize: '22px',
                     cursor: 'pointer',
                     borderRadius: '100%',
@@ -91,11 +99,10 @@ const CourseContent = ({ videoUrl }: Params) => {
                             md: 'block',
                         },
                         right: '-40px',
-                        background: '#00bcff',
+                        background: '#374651',
                         color: '#fff',
-                        height: '60%',
-                        width: '50px',
-                        fontSize: '22px',
+                        height: '30px',
+                        width: '30px',
                         cursor: 'pointer',
                         pointerEvents: 'all',
                         borderRadius: '100%',

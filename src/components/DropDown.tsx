@@ -73,8 +73,8 @@ const DropDown = () => {
     }
 
     const getSelectedModuleId = (label: string, id: string, type: string, index: number) => {
+        setMenuLabel(label);
         if (type !== 'quiz') {
-            setMenuLabel(label);
             dispatch(getSelectedModule(id));
             dispatch(getSelectedModuleItem(index));
         }
@@ -146,7 +146,8 @@ const DropDown = () => {
                                 {item.submenu.map((menu, index) => (
 
                                     <Link key={menu.title} href={menu.type === 'quiz' ? `/quiz/${item.id}` : `/topic/module/${item.id}/${menu.slug}`}>
-                                        <MenuItem  >
+                                        <MenuItem onClick={() => getSelectedModuleId(item.title, item.id, menu.type, index)
+                                        } >
                                             {menu.title}
                                         </MenuItem>
                                     </Link>
