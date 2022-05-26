@@ -5,7 +5,7 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/topic/module/1/topic-a',
+        destination: '/topic',
         permanent: true,
       },
     ]
