@@ -17,8 +17,11 @@ const Styles = {
     }
 }
 
+interface Params {
+    videoUrl?: string | undefined;
+}
 
-const CourseContent = () => {
+const CourseContent = ({ videoUrl }: Params) => {
     const { moduleId, moduleResourceIndex } = useSelector((state: State) => state.moduleInfo);
     const [moduleData, setModuleData] = useState<Data[]>([]);
     const [currentModule, setCurrentModule] = useState<Data>();
@@ -74,7 +77,7 @@ const CourseContent = () => {
                 }} />
 
                 <ReactPlayer
-                    url={currentModule?.submenu[moduleResourceIndex].videoUrl}
+                    url={videoUrl}
                     controls={true}
                     width='100%'
                     height='90%'

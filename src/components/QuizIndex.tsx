@@ -1,6 +1,5 @@
 import { Button, Tooltip, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { QuizProps } from 'pages/quiz';
 import { Quiz, Option, SubMenu } from 'interface/interface';
 import React, { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
