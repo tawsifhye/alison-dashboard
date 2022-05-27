@@ -12,8 +12,23 @@ const Styles = {
     nextPrevButton: {
         borderRadius: '8px',
         textAlign: 'center',
-        background: '#00bcff',
+        background: '#374651',
         boxShadow: '0 3px 8px 0 rgb(50 50 50 / 20%)',
+    },
+    nextPrevArrow: {
+        position: 'absolute',
+        display: {
+            xs: 'none',
+            md: 'block',
+        },
+        right: '-40px',
+        background: '#374651',
+        color: '#fff',
+        height: '30px',
+        width: '30px',
+        cursor: 'pointer',
+        pointerEvents: 'all',
+        borderRadius: '100%',
     }
 }
 
@@ -29,8 +44,9 @@ const CourseContent = ({ currentModule }: Params) => {
 
 
     const goNextPrevious = (type: string) => {
-        if (type === 'decrease') {
+        if (type === 'previous') {
             router.push(`/topic/module/${currentModule?.id}/${currentModule?.submenu[index - 1].slug}`)
+            return;
         }
         if (currentModule?.submenu[index + 1].type === 'video') {
             setIndex(index + 1);
@@ -59,7 +75,7 @@ const CourseContent = ({ currentModule }: Params) => {
     return (
         <Box sx={{ backgroundColor: '', position: 'relative', }}>
             <Box sx={{
-                padding: '0 30px',
+                padding: '20px 30px',
                 maxWidth: 800,
                 height: 500,
                 mx: 'auto',
@@ -77,22 +93,8 @@ const CourseContent = ({ currentModule }: Params) => {
 
 
 
-                {index ? <ArrowBackIosNewIcon sx={{
-                    position: 'absolute',
-                    display: {
-                        xs: 'none',
-                        md: 'block',
-                    },
-                    left: '-40px',
-                    background: '#374651',
-                    color: '#fff',
-                    height: '30px',
-                    width: '30px',
-                    fontSize: '22px',
-                    cursor: 'pointer',
-                    borderRadius: '100%',
-                }}
-                    onClick={() => goNextPrevious('decrease')}
+                {index ? <ArrowBackIosNewIcon sx={{ ...Styles.nextPrevArrow, left: '-40px' }}
+                    onClick={() => goNextPrevious('previous')}
                 />
                     : <></>
                 }
@@ -103,37 +105,27 @@ const CourseContent = ({ currentModule }: Params) => {
                     width='100%'
                     height='90%'
                 />
-                <Box sx={{ mt: 3, display: { xs: 'flex', md: 'none' }, justifyContent: 'space-between' }}>
+                <Box sx={{ mt: 2, display: { xs: 'flex', md: 'none' }, justifyContent: 'space-between' }}>
                     <Button variant='contained'
                         disableRipple
                         startIcon={<ArrowBackIosNewIcon />}
-                        sx={Styles.nextPrevButton}>
+                        sx={Styles.nextPrevButton}
+                        disabled={index === 0}
+                        onClick={() => goNextPrevious('previous')}
+                    >
                         Previous
                     </Button>
                     <Button variant='contained'
                         disableRipple
                         endIcon={<ArrowForwardIosIcon />}
-                        sx={Styles.nextPrevButton}>
+                        sx={Styles.nextPrevButton}
+                        onClick={() => goNextPrevious('next')}
+                    >
                         Next
                     </Button>
                 </Box>
                 <ArrowForwardIosIcon
-                    sx={{
-                        position: 'absolute',
-                        display: {
-                            xs: 'none',
-                            md: 'block',
-                        },
-                        right: '-40px',
-                        background: '#374651',
-                        color: '#fff',
-                        height: '30px',
-                        width: '30px',
-                        cursor: 'pointer',
-                        pointerEvents: 'all',
-                        borderRadius: '100%',
-                        zIndex: 1
-                    }}
+                    sx={{ ...Styles.nextPrevArrow, right: '-40px' }}
                     onClick={() => goNextPrevious('next')}
                 />
             </Box>
