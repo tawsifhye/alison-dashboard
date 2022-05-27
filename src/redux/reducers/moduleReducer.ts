@@ -1,6 +1,7 @@
 const initialState = {
     moduleId: '1',
     moduleResourceIndex: 0,
+    moduleData: [],
 }
 
 interface Action {
@@ -21,6 +22,12 @@ export const moduleReducer = (state=initialState ,action:Action)=>{
             return{
                 ...state,
                 moduleResourceIndex: action.payload
+            }
+        }
+        case 'FETCH_API_DATA':{
+            return{
+                ...state,
+                moduleData: action.payload
             }
         }
         default:

@@ -2,6 +2,7 @@
    {
       "id":"1",
       "title":"Module 1: Preventive Maintenance",
+      "moduleCompleted": 0,
       "submenu":[
          {
             "type":"video",
