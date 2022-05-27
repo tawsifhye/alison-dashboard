@@ -27,7 +27,7 @@ const StyledMenu = styled((props: any) => (
     />
 ))(({ theme }) => ({
     '& .MuiPaper-root': {
-        borderRadius: 6,
+
         marginTop: theme.spacing(2),
         minWidth: 180,
         color: '#465159',
@@ -40,7 +40,19 @@ const StyledMenu = styled((props: any) => (
             '& .MuiSvgIcon-root': {
                 fontSize: 18,
                 color: theme.palette.text.secondary,
-                marginLeft: theme.spacing(20),
+                [theme.breakpoints.up("lg")]: {
+                    marginLeft: theme.spacing('0em'),
+                    marginRight: theme.spacing('2em'),
+                },
+                [theme.breakpoints.down("lg")]: {
+                    marginLeft: theme.spacing('5em'),
+                },
+                [theme.breakpoints.up("xl")]: {
+                    marginLeft: theme.spacing('2em'),
+                    marginRight: theme.spacing(0),
+                },
+
+
             },
             '&:active': {
                 backgroundColor: alpha(
@@ -96,9 +108,10 @@ const DropDown = () => {
                 aria-expanded={open ? 'true' : undefined}
                 variant="contained"
                 sx={{
-                    background: '#fff',
+                    background: 'transparent',
                     color: '#465159',
-                    width: '100%',
+                    width: '600px',
+                    fontWeight: 'bold',
                     '&:hover': {
                         background: 'transparent'
                     }
@@ -134,13 +147,33 @@ const DropDown = () => {
                                     position: 'fixed',
                                     width: 'auto',
                                     padding: 0,
-                                    // left: '350px',
-                                    left: 'calc(20% + 470px)',
+                                    left: {
+                                        xl: '660px'
+                                    },
                                     top: '72px',
                                     minHeight: 'auto',
                                     borderLeft: '1px solid #f4f5f7',
-                                    // box-shadow: 0 3px 8px 0 #323232;
-                                    boxShadow: '0 3px 8px 0 rgb(50 50 50 / 20%)'
+                                    boxShadow: '0 3px 8px 0 rgb(50 50 50 / 20%)',
+                                    '@media screen and (min-width: 1810px) and (max-width: 1861px)': {
+                                        left: '650px'
+                                    },
+                                    '@media screen and (min-width: 1762px) and  (max-width: 1809px)': {
+                                        left: '640px'
+                                    },
+                                    '@media screen and (min-width: 1667px) and (max-width: 1761px)': {
+                                        left: '620px'
+                                    },
+                                    '@media screen and (min-width: 1572px) and (max-width: 1666px)': {
+                                        left: '599px'
+                                    },
+                                    '@media screen and (min-width: 1349px) and (max-width: 1571px)': {
+                                        left: '550px'
+                                    },
+                                    '@media screen and (min-width: 1139px) and (max-width: 1571px)': {
+                                        left: '500px'
+                                    },
+
+
                                 }}
                             >
                                 {item.submenu.map((menu, index) => (

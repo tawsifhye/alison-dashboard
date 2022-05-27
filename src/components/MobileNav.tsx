@@ -28,9 +28,15 @@ const MobileNav = () => {
                 padding: '15px 24px',
                 height: '72px',
                 background: '#fff',
-                display: 'flex',
+                display: {
+                    xs: 'flex',
+                    md: 'none'
+                },
                 justifyContent: 'space-between',
-                alignItems: 'center'
+                alignItems: 'center',
+                '@media screen and (max-width: 1138px)': {
+                    display: 'flex'
+                }
             }}>
                 <Box>
                     <MenuIcon sx={{ color: '#6F787E' }} />

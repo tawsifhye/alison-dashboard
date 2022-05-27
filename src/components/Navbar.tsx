@@ -25,6 +25,9 @@ const Navbar = () => {
             display: {
                 xs: 'none',
                 md: 'block',
+            },
+            '@media screen and (max-width: 1138px)': {
+                display: 'none'
             }
         }}>
             <Container maxWidth="xl">

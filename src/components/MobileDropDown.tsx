@@ -44,6 +44,9 @@ export default function MobileDropDown() {
             mt: 2,
             display: {
                 md: 'none',
+            },
+            '@media screen and (max-width: 1138px)': {
+                display: 'block'
             }
 
         }}>
