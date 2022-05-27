@@ -38,7 +38,7 @@ interface Params {
 
 const CourseContent = ({ currentModule }: Params) => {
     const [index, setIndex] = useState<number>(0);
-    const [videoUrl, setVideoUrl] = useState<string>();
+    const [videoUrl, setVideoUrl] = useState<string>(currentModule?.submenu[0]?.videoUrl);
     const router = useRouter()
     const { params } = router.query;
 
@@ -79,7 +79,7 @@ const CourseContent = ({ currentModule }: Params) => {
                 maxWidth: 800,
                 height: 500,
                 mx: 'auto',
-                mt: 5,
+                mt: 15,
                 display: {
                     md: 'flex'
                 },
