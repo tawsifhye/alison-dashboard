@@ -20,7 +20,6 @@ interface Params {
 const ModuleQuiz = ({ quiz }: Props) => {
 
     const [showResult, setShowResult] = useState<boolean>(false);
-    // const { showResult } = useSelector((state: State) => state.answers)
 
     return (
         <Box>

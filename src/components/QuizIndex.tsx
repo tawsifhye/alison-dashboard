@@ -30,17 +30,18 @@ interface Props {
 }
 
 const QuizIndex = ({ quiz, setShowResult }: Props) => {
+
     const { quizzes }: any = quiz;
     const [index, setIndex] = useState<number>(0);
     const [selectedId, setSelectedId] = useState<string>('');
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-
     const dispatch = useDispatch();
     const router = useRouter();
-    // console.log(router.query.id)
+
     const selectQuizOption = (id: string) => {
         setSelectedId(id);
     }
+
     const submitQuiz = (id: string, rightAnswer: string) => {
         if (!selectedId) {
             return;
@@ -55,6 +56,7 @@ const QuizIndex = ({ quiz, setShowResult }: Props) => {
         dispatch(submitAnswer(answer));
 
     }
+
     const goNext = () => {
         if (!isSubmitted)
             return;
@@ -62,12 +64,14 @@ const QuizIndex = ({ quiz, setShowResult }: Props) => {
         setIsSubmitted(false);
         setIndex(index + 1);
     }
+
     const showQuizResult = () => {
         if (isSubmitted) {
             setShowResult(true);
         }
 
     }
+
     return (
         <>
             <Typography sx={{
