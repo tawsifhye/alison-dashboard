@@ -38,7 +38,7 @@ interface Params {
 
 const CourseContent = ({ currentModule }: Params) => {
     const [index, setIndex] = useState<number>(0);
-    const [videoUrl, setVideoUrl] = useState<string>(currentModule?.submenu[0]?.videoUrl);
+    const [videoUrl, setVideoUrl] = useState<string>();
     const router = useRouter()
     const { params } = router.query;
 
@@ -59,10 +59,11 @@ const CourseContent = ({ currentModule }: Params) => {
 
     }
 
+
     useEffect(() => {
         if (params) {
             const lesson = currentModule?.submenu.find(lesson => lesson.slug === params[2]);
-            setVideoUrl(lesson?.videoUrl);
+            if (lesson) setVideoUrl(lesson?.videoUrl);
             const index = currentModule?.submenu.findIndex(object => {
                 return object.slug === params[2];
             });
@@ -100,7 +101,7 @@ const CourseContent = ({ currentModule }: Params) => {
                 }
 
                 <ReactPlayer
-                    url={videoUrl}
+                    url={videoUrl ? videoUrl : "https://youtu.be/TsDsE9fePLk"}
                     controls={true}
                     width='100%'
                     height='90%'

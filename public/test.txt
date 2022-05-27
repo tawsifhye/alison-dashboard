@@ -224,11 +224,18 @@ const data = [
 ]
 
 
-data[0].modules.map(item => item.moduleContent.map(obj => {
-    if (obj.id === "cr1mod1content1") {
-        obj.isCompleted = true
-    }
-}));
+// data[0].modules.map(item => item.moduleContent.map(obj => {
+//     if (obj.id === "cr1mod1content1") {
+//         obj.isCompleted = true
+//     }
+// }));
+
+// const newdata = data[0].modules.forEach(element => {
+//     element.moduleContent.forEach(obj => {
+//         if (obj.id === "cr1mod1") {
+//             obj.isCompleted = true
+//         }
+//     })
+// });
 
 
-console.log(data);
