@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -102,13 +102,17 @@ const CourseContent = ({ currentModule }: Params) => {
                 />
                     : <></>
                 }
-
-                <ReactPlayer
-                    url={videoUrl ? videoUrl : "https://youtu.be/TsDsE9fePLk"}
-                    controls={true}
-                    width='100%'
-                    height='90%'
-                />
+                {
+                    videoUrl ?
+                        <ReactPlayer
+                            url={videoUrl}
+                            controls={true}
+                            width='100%'
+                            height='90%'
+                        />
+                        :
+                        <CircularProgress />
+                }
                 <Box sx={{ mt: 2, display: { xs: 'flex', md: 'none' }, justifyContent: 'space-between' }}>
                     <Button variant='contained'
                         disableRipple
