@@ -61,6 +61,7 @@ const CourseContent = ({ currentModule }: Params) => {
 
     }
 
+    console.log(index, currentModule);
 
     useEffect(() => {
         if (params) {
@@ -105,7 +106,7 @@ const CourseContent = ({ currentModule }: Params) => {
                 {
                     // videoUrl ?
                     <ReactPlayer
-                        url={videoUrl || "https://youtu.be/TsDsE9fePLk"}
+                        url={videoUrl}
                         controls={true}
                         width='100%'
                         height='90%'

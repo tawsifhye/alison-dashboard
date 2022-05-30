@@ -6,18 +6,31 @@ import { wrapper } from 'redux/store'
 import Navbar from 'components/Navbar'
 import Footer from 'components/Footer'
 import MobileNav from 'components/MobileNav'
+import { useEffect, useState } from 'react'
 function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <>
-      <ThemeProvider theme={theme}>
-        <Navbar />
-        <MobileNav />
-        <Component {...pageProps} />
-        <Footer />
-      </ThemeProvider>
-    </>
-  )
+  const [showChild, setShowChild] = useState(false);
+  useEffect(() => {
+    setShowChild(true);
+  }, []);
 
+  if (!showChild) {
+    return null;
+  }
+
+  if (typeof window === "undefined") {
+    return <></>;
+  } else {
+    return (
+      <>
+        <ThemeProvider theme={theme}>
+          <Navbar />
+          <MobileNav />
+          <Component {...pageProps} />
+          <Footer />
+        </ThemeProvider>
+      </>
+    )
+  }
 }
 
 export default wrapper.withRedux(MyApp);
