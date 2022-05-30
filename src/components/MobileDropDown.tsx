@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { State } from 'redux/reducers';
 import Link from 'next/link';
 import { getSelectedModule, getSelectedModuleItem } from 'redux/actions/moduleAction';
+import { Box } from '@mui/material';
+import ProgressBar from './ProgressBar';
 
 
 export default function MobileDropDown() {
@@ -62,10 +64,13 @@ export default function MobileDropDown() {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
             >
-                <Typography sx={{
+                <Box sx={{
                     fontWeight: 500,
                     color: '#465159'
-                }}>{menuLabel ? menuLabel : moduleData[0]?.title}</Typography>
+                }}>
+                    {menuLabel ? menuLabel : moduleData[0]?.title}
+                    <ProgressBar bgcolor='#83C124' progress='50' />
+                </Box>
             </AccordionSummary>
             <AccordionDetails sx={{ padding: 0 }}>
                 {

@@ -12,7 +12,7 @@ const ProgressBar = ({ bgcolor, progress }: Props) => {
         width: '150px',
         backgroundColor: 'whitesmoke',
         borderRadius: 40,
-        margin: 50,
+        margin: '5px 0',
     }
 
     const Childdiv = {

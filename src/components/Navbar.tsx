@@ -53,12 +53,14 @@ const Navbar = () => {
                     <Box sx={{
                         width: '100%',
                         display: 'flex',
+                        justifyContent: 'space-around',
                         alignItems: 'center',
                         marginLeft: 'auto'
                     }}>
                         <Typography sx={{ color: 'black', marginLeft: 'auto' }}></Typography>
-                        <Box component='span' sx={{ color: 'black' }}>  0% Complete</Box>
-                        <ProgressBar bgcolor='#83C124' progress='50' />
+                        <Box component='span' sx={{ color: 'black', mr: 5 }}>  0% Complete
+                            <ProgressBar bgcolor='#83C124' progress='50' />
+                        </Box>
                         <AccountCircleRoundedIcon sx={{ color: '#374651' }} />
                     </Box>
 
