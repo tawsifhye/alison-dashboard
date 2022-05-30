@@ -13,3 +13,8 @@ export const showResult = (payload:boolean) => {
       payload,
     };
   };
+export const resetQuiz = () => {
+    return {
+      type: "RESET_QUIZ",
+    };
+  };

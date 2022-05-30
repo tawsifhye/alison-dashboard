@@ -1,10 +1,10 @@
 import { Box } from '@mui/system';
 import QuizIndex from 'components/QuizIndex';
 import Review from 'components/Review';
-import { Data, Quiz, SubMenu } from 'interface/interface';
+import { Data, SubMenu } from 'interface/interface';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { State } from 'redux/reducers';
+
+
 import ResultPage from '../../components/ResultPage';
 
 interface Props {
@@ -22,6 +22,7 @@ const ModuleQuiz = ({ quiz }: Props) => {
 
     const [showResult, setShowResult] = useState<boolean>(false);
     const [showReview, setShowReview] = useState<boolean>(false);
+
 
     return (
         <Box>

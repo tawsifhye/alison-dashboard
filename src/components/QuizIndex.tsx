@@ -1,11 +1,11 @@
 import { Button, Tooltip, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { Quiz, Option, SubMenu } from 'interface/interface';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import DoneIcon from '@mui/icons-material/Done';
 import { useDispatch } from 'react-redux';
-import { showResult, submitAnswer } from 'redux/actions/quizAction';
+import { resetQuiz, showResult, submitAnswer } from 'redux/actions/quizAction';
 import { useRouter } from 'next/router';
 import { primaryButton } from 'styles/commonStyles';
 import Image from 'next/image';
@@ -37,6 +37,15 @@ const QuizIndex = ({ quiz, setShowResult }: Props) => {
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
     const dispatch = useDispatch();
     const router = useRouter();
+    const { id } = router.query;
+
+
+    useEffect(() => {
+        setIndex(0);
+        setSelectedId('');
+        dispatch(resetQuiz());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id])
 
     const selectQuizOption = (id: string) => {
         setSelectedId(id);

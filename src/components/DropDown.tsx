@@ -10,6 +10,7 @@ import { Data } from 'interface/interface';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { getSelectedModule, getSelectedModuleItem } from 'redux/actions/moduleAction';
+import { useRouter } from 'next/router';
 
 
 const StyledMenu = styled((props: any) => (
@@ -71,6 +72,8 @@ const DropDown = () => {
     const [selectedMenuId, setSelectedMenuId] = useState<string>("");
     const [moduleData, setModuleData] = useState<Data[]>([]);
     const [menuLabel, setMenuLabel] = useState<string>('');
+    const router = useRouter();
+    const { params } = router.query;
     const dispatch = useDispatch()
     const open = Boolean(anchorEl);
     const handleClick = (event: any) => {
@@ -121,7 +124,8 @@ const DropDown = () => {
                 onClick={handleClick}
                 startIcon={<KeyboardArrowDownIcon />}
             >
-                {!menuLabel ? moduleData[0]?.title : menuLabel}
+                {params ? moduleData[parseInt(params![1]) - 1]?.title : menuLabel}
+
             </Button>
             <StyledMenu
                 id="demo-customized-menu"

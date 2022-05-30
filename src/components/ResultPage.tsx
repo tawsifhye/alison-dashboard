@@ -1,6 +1,6 @@
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { SubmittedAnswer } from 'interface/interface';
+import { Data, SubmittedAnswer } from 'interface/interface';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -22,7 +22,11 @@ const ResultPage = ({ setShowReview, setShowResult }: Props) => {
 
     const { submittedAnswer }: Answer = useSelector((state: State) => state.answers);
     const [percentage, setPercentage] = useState<number>(0);
+    const [moduleIndex, setModuleIndex] = useState<number>(0);
+    const [moduleData, setModuleData] = useState<Data[] | undefined>();
     const router = useRouter();
+
+    const { id } = router.query;
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -33,6 +37,18 @@ const ResultPage = ({ setShowReview, setShowResult }: Props) => {
             }
             setPercentage(rightPercentage);
         })
+
+        fetch('/fakeData.json')
+            .then(res => res.json())
+            .then(data => setModuleData(data));
+
+
+        const index = moduleData?.findIndex(object => {
+            return object.id === id;
+
+        });
+        if (index)
+            setModuleIndex(index);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -41,7 +57,14 @@ const ResultPage = ({ setShowReview, setShowResult }: Props) => {
     }
 
     const finishQuiz = () => {
-        router.push('/topic/module/1/topic-a')
+        if (moduleData) {
+            if (moduleIndex === moduleData?.length - 1) {
+                router.push(`/topic/module/${moduleData[moduleIndex].id}/${moduleData[moduleIndex].submenu[0].slug}`)
+            }
+            else {
+                router.push(`/topic/module/${parseInt(moduleData[moduleIndex].id) + 1}/${moduleData[moduleIndex + 1].submenu[0].slug}`)
+            }
+        }
     }
 
     const reviewQuiz = () => {

@@ -6,7 +6,7 @@ const initialState = {
 
 interface Action {
     type: string;
-    payload: {}| boolean;
+    payload?: {}| boolean;
 }
 
 
@@ -21,6 +21,11 @@ export const quizReducer = (state = initialState, action:Action) => {
         return {
           ...state,
           showResult: action.payload,
+        };
+      case "RESET_QUIZ":
+        return {
+          ...state,
+          submittedAnswer: initialState.submittedAnswer,
         };
       
       default:

@@ -2,6 +2,8 @@ import CourseContent from 'components/CourseContent';
 import { Data } from 'interface/interface';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { resetQuiz } from 'redux/actions/quizAction';
 import useSWR from 'swr';
 
 
@@ -11,6 +13,7 @@ const Slug = () => {
     const { params } = router.query;
     const fetcher = (url: any): any => fetch(url).then(res => res.json())
     const { data, error } = useSWR<Data[]>('/fakeData.json', fetcher)
+    const dispatch = useDispatch();
 
     const filterData = () => {
         if (params) {
@@ -24,7 +27,7 @@ const Slug = () => {
     useEffect(() => {
 
         filterData();
-
+        dispatch(resetQuiz());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [params && params[2]])
     return (

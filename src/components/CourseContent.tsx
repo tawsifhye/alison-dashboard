@@ -7,7 +7,7 @@ import { Box } from '@mui/system';
 import { Data } from 'interface/interface';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
-import { fetchApiData } from 'redux/actions/moduleAction';
+
 
 
 const Styles = {
@@ -104,7 +104,7 @@ const CourseContent = ({ currentModule }: Params) => {
                 }
 
                 <ReactPlayer
-                    url={videoUrl ? videoUrl : "https://youtu.be/TsDsE9fePLk"}
+                    url={videoUrl}
                     controls={true}
                     width='100%'
                     height='90%'
