@@ -74,7 +74,7 @@ const CourseContent = ({ currentModule }: Params) => {
             }
         }
         // dispatch(fetchApiData())
-    }, [currentModule, params])
+    }, [index, params, currentModule?.submenu])
 
     return (
         <Box sx={{ backgroundColor: '', position: 'relative', }}>
