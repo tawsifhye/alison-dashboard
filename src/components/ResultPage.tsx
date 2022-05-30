@@ -13,7 +13,12 @@ interface Answer {
     submittedAnswer: SubmittedAnswer[]
 }
 
-const ResultPage = () => {
+interface Props {
+    setShowReview: (showReview: boolean) => void;
+    setShowResult: (showResult: boolean) => void;
+}
+
+const ResultPage = ({ setShowReview, setShowResult }: Props) => {
 
     const { submittedAnswer }: Answer = useSelector((state: State) => state.answers);
     const [percentage, setPercentage] = useState<number>(0);
@@ -36,7 +41,12 @@ const ResultPage = () => {
     }
 
     const finishQuiz = () => {
-        console.log('Finish')
+        router.push('/topic/module/1/topic-a')
+    }
+
+    const reviewQuiz = () => {
+        setShowResult(false);
+        setShowReview(true);
     }
 
 
@@ -222,7 +232,9 @@ const ResultPage = () => {
 
                         <Button sx={{ ...primaryButton }}
                             variant='contained'
-                            disableRipple>
+                            disableRipple
+                            onClick={reviewQuiz}
+                        >
                             Review
                         </Button>
                     </Box>

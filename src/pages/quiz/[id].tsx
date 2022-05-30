@@ -1,5 +1,6 @@
 import { Box } from '@mui/system';
 import QuizIndex from 'components/QuizIndex';
+import Review from 'components/Review';
 import { Data, Quiz, SubMenu } from 'interface/interface';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -20,16 +21,23 @@ interface Params {
 const ModuleQuiz = ({ quiz }: Props) => {
 
     const [showResult, setShowResult] = useState<boolean>(false);
+    const [showReview, setShowReview] = useState<boolean>(false);
 
     return (
         <Box>
 
             {
 
-                showResult ? <ResultPage />
-                    :
-                    <QuizIndex quiz={quiz} setShowResult={setShowResult} />
+                (showResult && !showReview) && <ResultPage setShowReview={setShowReview} setShowResult={setShowResult} />
 
+            }
+            {
+                (!showResult && !showReview) && <QuizIndex quiz={quiz} setShowResult={setShowResult} />
+            }
+
+
+            {
+                showReview && <Review quiz={quiz} setShowReview={setShowReview} setShowResult={setShowResult} />
             }
         </Box>
     );
