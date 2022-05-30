@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { getSelectedModule, getSelectedModuleItem } from 'redux/actions/moduleAction';
 import { useRouter } from 'next/router';
+import useSWR from 'swr';
 
 
 const StyledMenu = styled((props: any) => (
@@ -70,9 +71,11 @@ const StyledMenu = styled((props: any) => (
 const DropDown = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedMenuId, setSelectedMenuId] = useState<string>("");
-    const [moduleData, setModuleData] = useState<Data[]>([]);
     const [menuLabel, setMenuLabel] = useState<string>('');
+    const fetcher = (url: any): any => fetch(url).then(res => res.json())
+    const { data, error } = useSWR<Data[]>('https://alison-dashboard.vercel.app/fakeData.json', fetcher)
     const router = useRouter();
+
     const { params } = router.query;
     const dispatch = useDispatch()
     const open = Boolean(anchorEl);
@@ -95,13 +98,7 @@ const DropDown = () => {
         }
         setAnchorEl(null);
     }
-    useEffect(() => {
-        fetch('/fakeData.json')
-            .then(res => res.json())
-            .then(data => setModuleData(data))
 
-
-    }, [])
     return (
         <>
             <Button
@@ -124,7 +121,10 @@ const DropDown = () => {
                 onClick={handleClick}
                 startIcon={<KeyboardArrowDownIcon />}
             >
-                {params ? moduleData[parseInt(params![1]) - 1]?.title : menuLabel}
+                {
+                    data &&
+                        params ? data![parseInt(params![1]) - 1]?.title : menuLabel
+                }
 
             </Button>
             <StyledMenu
@@ -137,7 +137,7 @@ const DropDown = () => {
                 onClose={handleClose}
             >
                 {
-                    moduleData.map(item => (
+                    data?.map(item => (
                         <MenuItem
                             key={item.title}
                             sx={{ width: '100%' }}
