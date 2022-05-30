@@ -104,7 +104,7 @@ const CourseContent = ({ currentModule }: Params) => {
                 }
 
                 <ReactPlayer
-                    url={videoUrl ? videoUrl : "https://youtu.be/vBURTt97EkA?list=PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O"}
+                    url={videoUrl ? videoUrl : "https://youtu.be/TsDsE9fePLk"}
                     controls={true}
                     width='100%'
                     height='90%'
