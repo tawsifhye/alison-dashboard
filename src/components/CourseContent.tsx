@@ -103,15 +103,15 @@ const CourseContent = ({ currentModule }: Params) => {
                     : <></>
                 }
                 {
-                    videoUrl ?
-                        <ReactPlayer
-                            url={videoUrl}
-                            controls={true}
-                            width='100%'
-                            height='90%'
-                        />
-                        :
-                        <CircularProgress />
+                    // videoUrl ?
+                    <ReactPlayer
+                        url={videoUrl || "https://youtu.be/TsDsE9fePLk"}
+                        controls={true}
+                        width='100%'
+                        height='90%'
+                    />
+                    // :
+                    // <CircularProgress />
                 }
                 <Box sx={{ mt: 2, display: { xs: 'flex', md: 'none' }, justifyContent: 'space-between' }}>
                     <Button variant='contained'
