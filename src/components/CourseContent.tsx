@@ -6,7 +6,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Box } from '@mui/system';
 import { Data } from 'interface/interface';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
+
 
 
 
@@ -43,7 +43,7 @@ const CourseContent = ({ currentModule }: Params) => {
     const [videoUrl, setVideoUrl] = useState<string>();
     const router = useRouter()
     const { params } = router.query;
-    const dispatch = useDispatch();
+
 
     const goNextPrevious = (type: string) => {
         if (type === 'previous') {
@@ -61,7 +61,7 @@ const CourseContent = ({ currentModule }: Params) => {
 
     }
 
-    console.log(index, currentModule);
+    // console.log(index, currentModule);
 
     useEffect(() => {
         if (params) {

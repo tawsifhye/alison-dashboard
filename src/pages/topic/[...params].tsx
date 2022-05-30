@@ -12,7 +12,7 @@ const Slug = () => {
     const router = useRouter();
     const { params } = router.query;
     const fetcher = (url: any): any => fetch(url).then(res => res.json())
-    const { data, error } = useSWR<Data[]>('/fakeData.json', fetcher)
+    const { data, error } = useSWR<Data[]>('https://alison-dashboard.vercel.app/fakeData.json', fetcher)
     const dispatch = useDispatch();
 
     const filterData = () => {
@@ -29,7 +29,7 @@ const Slug = () => {
         filterData();
         dispatch(resetQuiz());
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [params && params[2]])
+    }, [data, params && params[2]])
     return (
         <>
             <CourseContent currentModule={currentModule} />
