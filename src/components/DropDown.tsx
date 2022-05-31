@@ -147,7 +147,9 @@ const DropDown = () => {
                             sx={{ width: '100%' }}
                             component="div"
                             onMouseOver={() => showSubMenu(item.id)}
-                            onMouseLeave={() => showSubMenu('')} disableRipple>
+                            onMouseLeave={() => showSubMenu('')}
+                            onClick={() => setAnchorEl(null)}
+                            disableRipple>
                             <Box component='span'></Box>
                             <Box component='span'
                                 sx={{
@@ -176,7 +178,10 @@ const DropDown = () => {
                                         background: '#f4f5f7',
                                     }
                                 }}></Box>
-                            {item.title} <ChevronRightIcon />
+                            <Link key={item.id} href={`/topic/module/${item.id}/${item.submenu[0].slug}`}>
+                                {item.title}
+                            </Link>
+                            <ChevronRightIcon />
                             {item.id === selectedMenuId && < Box
                                 sx={{
                                     background: '#fff',
