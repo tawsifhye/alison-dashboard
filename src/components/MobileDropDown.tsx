@@ -5,19 +5,23 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import { Data } from 'interface/interface';
-import { useDispatch, useSelector } from 'react-redux';
-import { State } from 'redux/reducers';
+import { useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { getSelectedModule, getSelectedModuleItem } from 'redux/actions/moduleAction';
 import { Box } from '@mui/material';
 import ProgressBar from './ProgressBar';
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
 
 
 export default function MobileDropDown() {
     const [moduleData, setModuleData] = useState<Data[]>([]);
     const [menuLabel, setMenuLabel] = useState<string>("");
     const [expanded, setExpanded] = useState<string | false>(false);
-    const { moduleId, moduleResourceIndex } = useSelector((state: State) => state.moduleInfo)
+    const fetcher = (url: any): any => fetch(url).then(res => res.json())
+    const { data, error } = useSWR<Data[]>('https://alison-dashboard.vercel.app/fakeData.json', fetcher)
+    const router = useRouter();
+    const { params } = router.query;
     const dispatch = useDispatch();
 
     const handleChange =
@@ -41,17 +45,22 @@ export default function MobileDropDown() {
 
 
     return (
-        <Accordion elevation={0} sx={{
-            width: '100%',
-            mt: 2,
-            display: {
-                md: 'none',
-            },
-            '@media screen and (max-width: 1138px)': {
-                display: 'block'
-            }
 
-        }}>
+        <Accordion elevation={0}
+            sx={{
+                width: '100%',
+                mt: 2,
+                display: {
+                    md: 'none',
+                },
+                '& .MuiAccordion-root:before': {
+                    height: '0px',
+                },
+                '@media screen and (max-width: 1138px)': {
+                    display: 'block'
+                }
+
+            }}>
             <AccordionSummary
                 expandIcon={<ArrowDropDownIcon
                     sx={{
@@ -66,9 +75,12 @@ export default function MobileDropDown() {
             >
                 <Box sx={{
                     fontWeight: 500,
-                    color: '#465159'
+                    color: '#465159',
                 }}>
-                    {menuLabel ? menuLabel : moduleData[0]?.title}
+                    {
+                        data &&
+                            params ? data![parseInt(params![1]) - 1]?.title : menuLabel
+                    }
                     <ProgressBar bgcolor='#83C124' progress='50' />
                 </Box>
             </AccordionSummary>
@@ -90,15 +102,14 @@ export default function MobileDropDown() {
                                     id="panel1bh-header"
                                     onClick={() => handleChange(module.id)}
                                     sx={{
-                                        margin: 0,
                                         padding: '0px !important',
-
                                     }}
                                 >
 
                                     <Typography sx={{
                                         width: '100%',
                                         flexShrink: 0,
+                                        marginTop: '-15px',
                                         backgroundColor: '#E8E8E8',
                                         padding: '10px',
                                     }}>
