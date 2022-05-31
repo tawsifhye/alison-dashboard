@@ -12,6 +12,9 @@ import { useDispatch } from 'react-redux';
 import { getSelectedModule, getSelectedModuleItem } from 'redux/actions/moduleAction';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
+import Styles from '../styles/Navbar.module.css'
+
+
 
 
 const StyledMenu = styled((props: any) => (
@@ -99,6 +102,7 @@ const DropDown = () => {
         setAnchorEl(null);
     }
 
+
     return (
         <>
             <Button
@@ -137,13 +141,41 @@ const DropDown = () => {
                 onClose={handleClose}
             >
                 {
-                    data?.map(item => (
+                    data?.map((item, index) => (
                         <MenuItem
                             key={item.title}
                             sx={{ width: '100%' }}
                             component="div"
                             onMouseOver={() => showSubMenu(item.id)}
                             onMouseLeave={() => showSubMenu('')} disableRipple>
+                            <Box component='span'></Box>
+                            <Box component='span'
+                                sx={{
+                                    border: '2px solid #e8e8e8',
+                                    background: '#f4f5f7',
+                                    width: '20px',
+                                    height: '20px',
+                                    display: 'inline-block',
+                                    borderRadius: '100%',
+                                    margin: '2px 28px 0 0',
+                                    left: '20px',
+                                    position: 'relative',
+                                    top: '0px',
+                                    transition: 'all .3s ease-in',
+                                    '&:before': {
+                                        content: "''",
+                                        position: 'absolute',
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        bottom: '-110%',
+                                        display: index === data.length - 1 ? 'none' : 'inline-block',
+                                        zIndex: 10,
+                                        width: "1px",
+                                        height: "15px",
+                                        border: '1px solid #e8e8e8',
+                                        background: '#f4f5f7',
+                                    }
+                                }}></Box>
                             {item.title} <ChevronRightIcon />
                             {item.id === selectedMenuId && < Box
                                 sx={{
@@ -185,7 +217,35 @@ const DropDown = () => {
                                     <Link key={menu.title} href={menu.type === 'quiz' ? `/quiz/${item.id}` : `/topic/module/${item.id}/${menu.slug}`}>
                                         <MenuItem onClick={() => getSelectedModuleId(item.title, item.id, menu.type, index)
                                         } >
+                                            <Box component='span'
+                                                sx={{
+                                                    border: '2px solid #e8e8e8',
+                                                    background: '#f4f5f7',
+                                                    width: '20px',
+                                                    height: '20px',
+                                                    display: 'inline-block',
+                                                    borderRadius: '100%',
+                                                    margin: '2px 28px 0 0',
+                                                    left: '20px',
+                                                    position: 'relative',
+                                                    top: '0px',
+                                                    transition: 'all .3s ease-in',
+                                                    '&:before': {
+                                                        content: "''",
+                                                        position: 'absolute',
+                                                        left: '50%',
+                                                        transform: 'translateX(-50%)',
+                                                        bottom: '-110%',
+                                                        display: index === item.submenu.length - 1 ? 'none' : 'inline-block',
+                                                        zIndex: 10,
+                                                        width: "1px",
+                                                        height: "15px",
+                                                        border: '1px solid #e8e8e8',
+                                                        background: '#f4f5f7',
+                                                    }
+                                                }}></Box>
                                             {menu.title}
+
                                         </MenuItem>
                                     </Link>
 
