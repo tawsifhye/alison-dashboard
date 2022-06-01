@@ -4,8 +4,11 @@ import ReactPlayer from 'react-player';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Box } from '@mui/system';
-import { Data } from 'interface/interface';
+import { Data, FinishedModule } from 'interface/interface';
 import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { State } from 'redux/reducers';
+import { getFinishedModules, updateFinishedModules } from 'redux/actions/moduleAction';
 
 
 
@@ -43,12 +46,34 @@ const CourseContent = ({ currentModule }: Params) => {
     const [videoUrl, setVideoUrl] = useState<string>();
     const router = useRouter()
     const { params } = router.query;
-
+    const dispatch = useDispatch();
+    const { finishedModules }: any = useSelector((state: State) => state.moduleInfo);
+    console.log(finishedModules)
+    // useEffect(() => {
+    //     console.log(finishedModules)
+    // }, [finishedModules])
 
     const goNextPrevious = (type: string) => {
         if (type === 'previous') {
             router.push(`/topic/module/${currentModule?.id}/${currentModule?.submenu[index - 1].slug}`)
             return;
+        }
+        const filteredModule = finishedModules.find((module: FinishedModule) => module.moduleId === currentModule?.id);
+        // console.log(filteredModule)
+        if (!filteredModule) {
+            const newFinishedModule: any = {
+                moduleId: currentModule?.id,
+                completedLessonId: [currentModule?.submenu[index].id]
+            }
+            const newArr = [...finishedModules, newFinishedModule]
+            dispatch(getFinishedModules(newArr))
+        }
+        else {
+            const lessonIndex = finishedModules.findIndex((module: FinishedModule) => module.moduleId === filteredModule.moduleId)
+            console.log(lessonIndex)
+            const newLessonsId = [...finishedModules[lessonIndex].completedLessonId, currentModule?.submenu[index].id]
+            finishedModules[lessonIndex].completedLessonId = newLessonsId;
+            dispatch(getFinishedModules(finishedModules));
         }
         if (currentModule?.submenu[index + 1].type === 'video') {
             setIndex(index + 1);

@@ -1,7 +1,14 @@
-const initialState = {
-    moduleId: '1',
+import { FinishedModule } from 'interface/interface';
+const initialState :InitialState = {
+
     moduleResourceIndex: 0,
-    moduleData: [],
+
+    finishedModules: [],
+}
+
+interface InitialState {
+    moduleResourceIndex: number;
+    finishedModules: FinishedModule[],
 }
 
 interface Action {
@@ -30,6 +37,13 @@ export const moduleReducer = (state=initialState ,action:Action)=>{
                 moduleData: action.payload
             }
         }
+        case 'GET_FINISHED_MODULES':{
+            return{
+                ...state,
+                finishedModules:  action.payload
+            }
+        }
+       
         default:
             return state;
     }

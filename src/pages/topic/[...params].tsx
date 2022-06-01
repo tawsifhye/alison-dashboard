@@ -12,7 +12,7 @@ const Slug = () => {
     const router = useRouter();
     const { params } = router.query;
     const fetcher = (url: any): any => fetch(url).then(res => res.json())
-    const { data, error } = useSWR<Data[]>('https://alison-dashboard.vercel.app/fakeData.json', fetcher)
+    const { data, error } = useSWR<Data[]>('https://tawsifhye.github.io/data/alisonmodule.json', fetcher)
     const dispatch = useDispatch();
 
     const filterData = () => {

@@ -1,3 +1,6 @@
+import { UpdateModule } from './../../interface/interface';
+import { FinishedModule } from "interface/interface"
+
 export const getSelectedModule =(payload: string)=>{
     return{
         type: 'SELECT_MODULE',
@@ -10,14 +13,16 @@ export const getSelectedModuleItem =(payload: number)=>{
         payload
     }
 }
-
-export const fetchApiData = () => {
-    return async (dispatch:any) => {
-        const response = await fetch('https://alison-dashboard.vercel.app/fakeData.json')
-            .then(res => res.json());
-        dispatch({
-            type: 'FETCH_API_DATA',
-            payload: response
-        })
+export const getFinishedModules =(payload:FinishedModule[])=>{
+    return{
+        type: 'GET_FINISHED_MODULES',
+        payload
+    }
+}
+export const updateFinishedModules =(payload:UpdateModule)=>{
+    console.log(payload)
+    return{
+        type: 'UPDATE_FINISHED_MODULES',
+        payload
     }
 }

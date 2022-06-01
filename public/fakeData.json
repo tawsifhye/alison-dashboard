@@ -5,18 +5,21 @@
       "moduleCompleted": 0,
       "submenu":[
          {
+            "id": "1",
             "type":"video",
             "title":"Topic A",
             "slug": "topic-a",
             "videoUrl":"https://youtu.be/TsDsE9fePLk"
          },
          {
+            "id": "2",
             "type":"video",
             "title":"Topic A - Demo 1 -Preventive Maintenance", 
             "slug": "topic-a-demo-1-preventive-maintenance",
             "videoUrl":"https://www.youtube.com/watch?v=cwP1vTqVaR4"
          },
          {
+            "id": "3",
             "type":"quiz",
             "title":"Review Quiz",
             "slug":"topic-a-quiz",
@@ -311,18 +314,21 @@
       "moduleCompleted": 0,
       "submenu":[
          {
+            "id": "1",
             "type":"video",
             "title":"Topic A:OS",
             "slug": "topic-a-os",
             "videoUrl":"https://youtu.be/vBURTt97EkA?list=PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O"
          },
          {
+            "id": "2",
             "type":"video",
             "title":"Topic A - Demo 1 -OS Maintenance", 
             "slug": "topic-a-demo-1-os-maintenance",
             "videoUrl":"https://www.youtube.com/watch?v=nZ43misC0s0"
          },
          {
+            "id": "3",
             "type":"quiz",
             "title":"Review Quiz",
             "slug":"topic-os-quiz",

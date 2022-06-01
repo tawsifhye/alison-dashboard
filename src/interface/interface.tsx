@@ -29,9 +29,20 @@ export interface Data {
 }
 
 export interface SubMenu {
+    id: string;
     type: string;
     title: string;
     slug: string;
     videoUrl?: string;
     quizzes?: Quiz[]
+}
+
+
+export interface FinishedModule {
+    moduleId: string;
+    completedLessonId: string[];
+}
+export interface UpdateModule {
+    moduleId: string;
+    completedLessonId: string[];
 }
