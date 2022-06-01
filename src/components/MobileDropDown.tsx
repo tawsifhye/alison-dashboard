@@ -15,11 +15,11 @@ import useSWR from 'swr';
 
 
 export default function MobileDropDown() {
-    const [moduleData, setModuleData] = useState<Data[]>([]);
+
     const [menuLabel, setMenuLabel] = useState<string>("");
     const [expanded, setExpanded] = useState<string | false>(false);
     const fetcher = (url: any): any => fetch(url).then(res => res.json())
-    const { data, error } = useSWR<Data[]>('https://alison-dashboard.vercel.app/fakeData.json', fetcher)
+    const { data, error } = useSWR<Data[]>('https://tawsifhye.github.io/data/alisonmodule.json', fetcher)
     const router = useRouter();
     const { params } = router.query;
     const dispatch = useDispatch();
@@ -28,11 +28,7 @@ export default function MobileDropDown() {
         (panel: string) => (event: SyntheticEvent, isExpanded: boolean) => {
             setExpanded(isExpanded ? panel : false);
         };
-    useEffect(() => {
-        fetch('/fakeData.json')
-            .then(res => res.json())
-            .then(data => setModuleData(data))
-    }, []);
+
 
     const getSelectedModuleId = (label: string, id: string, type: string, index: number) => {
         setExpanded(false);
@@ -79,14 +75,14 @@ export default function MobileDropDown() {
                 }}>
                     {
                         data &&
-                            params ? data![parseInt(params![1]) - 1]?.title : menuLabel
+                            params ? data[parseInt(params![1]) - 1]?.title : menuLabel
                     }
                     <ProgressBar bgcolor='#83C124' progress='50' />
                 </Box>
             </AccordionSummary>
             <AccordionDetails sx={{ padding: 0 }}>
                 {
-                    moduleData.map(module => (
+                    data?.map(module => (
                         <>
                             <Accordion
                                 key={module.id}

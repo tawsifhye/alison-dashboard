@@ -8,7 +8,7 @@ import { Data, FinishedModule } from 'interface/interface';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from 'redux/reducers';
-import { getFinishedModules, updateFinishedModules } from 'redux/actions/moduleAction';
+import { getFinishedModules } from 'redux/actions/moduleAction';
 
 
 
@@ -48,10 +48,6 @@ const CourseContent = ({ currentModule }: Params) => {
     const { params } = router.query;
     const dispatch = useDispatch();
     const { finishedModules }: any = useSelector((state: State) => state.moduleInfo);
-    console.log(finishedModules)
-    // useEffect(() => {
-    //     console.log(finishedModules)
-    // }, [finishedModules])
 
     const goNextPrevious = (type: string) => {
         if (type === 'previous') {
@@ -59,7 +55,7 @@ const CourseContent = ({ currentModule }: Params) => {
             return;
         }
         const filteredModule = finishedModules.find((module: FinishedModule) => module.moduleId === currentModule?.id);
-        // console.log(filteredModule)
+
         if (!filteredModule) {
             const newFinishedModule: any = {
                 moduleId: currentModule?.id,
@@ -70,7 +66,6 @@ const CourseContent = ({ currentModule }: Params) => {
         }
         else {
             const lessonIndex = finishedModules.findIndex((module: FinishedModule) => module.moduleId === filteredModule.moduleId)
-            console.log(lessonIndex)
             const newLessonsId = [...finishedModules[lessonIndex].completedLessonId, currentModule?.submenu[index].id]
             finishedModules[lessonIndex].completedLessonId = newLessonsId;
             dispatch(getFinishedModules(finishedModules));
@@ -86,7 +81,7 @@ const CourseContent = ({ currentModule }: Params) => {
 
     }
 
-    // console.log(index, currentModule);
+
 
     useEffect(() => {
         if (params) {
@@ -99,7 +94,7 @@ const CourseContent = ({ currentModule }: Params) => {
                 setIndex(index);
             }
         }
-        // dispatch(fetchApiData())
+
     }, [index, params, currentModule?.submenu])
 
     return (
@@ -129,15 +124,14 @@ const CourseContent = ({ currentModule }: Params) => {
                     : <></>
                 }
                 {
-                    // videoUrl ?
+
                     <ReactPlayer
                         url={videoUrl}
                         controls={true}
                         width='100%'
                         height='90%'
                     />
-                    // :
-                    // <CircularProgress />
+
                 }
                 <Box sx={{ mt: 2, display: { xs: 'flex', md: 'none' }, justifyContent: 'space-between' }}>
                     <Button variant='contained'

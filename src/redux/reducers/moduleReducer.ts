@@ -1,8 +1,6 @@
 import { FinishedModule } from 'interface/interface';
 const initialState :InitialState = {
-
     moduleResourceIndex: 0,
-
     finishedModules: [],
 }
 
