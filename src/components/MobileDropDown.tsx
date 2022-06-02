@@ -18,6 +18,7 @@ export default function MobileDropDown() {
 
     const [menuLabel, setMenuLabel] = useState<string>("");
     const [expanded, setExpanded] = useState<string | false>(false);
+    const [currentModulePercentage, setCurrentModulePercentage] = useState<number>(0);
     const fetcher = (url: any): any => fetch(url).then(res => res.json())
     const { data, error } = useSWR<Data[]>('https://tawsifhye.github.io/data/alisonmodule.json', fetcher)
     const router = useRouter();
@@ -77,7 +78,7 @@ export default function MobileDropDown() {
                         data &&
                             params ? data[parseInt(params![1]) - 1]?.title : menuLabel
                     }
-                    <ProgressBar bgcolor='#83C124' progress='50' />
+                    <ProgressBar bgcolor='#F49B29' currentModulePercentage={currentModulePercentage} setCurrentModulePercentage={setCurrentModulePercentage} />
                 </Box>
             </AccordionSummary>
             <AccordionDetails sx={{ padding: 0 }}>

@@ -19,10 +19,4 @@ export const getFinishedModules =(payload:FinishedModule[])=>{
         payload
     }
 }
-export const updateFinishedModules =(payload:UpdateModule)=>{
-    console.log(payload)
-    return{
-        type: 'UPDATE_FINISHED_MODULES',
-        payload
-    }
-}
+

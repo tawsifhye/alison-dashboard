@@ -71,7 +71,6 @@ const ResultPage = ({ setShowReview, setShowResult }: Props) => {
         }
         else {
             const lessonIndex = finishedModules.findIndex((module: FinishedModule) => module.moduleId === filterFinsihedModule.moduleId)
-            console.log(filterFinsihedModule);
             if (index) {
                 const newLessonsId = [...finishedModules[lessonIndex].completedLessonId, currentModule?.submenu[index].id]
                 finishedModules[lessonIndex].completedLessonId = newLessonsId;

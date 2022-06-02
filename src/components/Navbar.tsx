@@ -16,7 +16,7 @@ import { useRouter } from 'next/router';
 const Navbar = () => {
 
     const router = useRouter();
-
+    const [currentModulePercentage, setCurrentModulePercentage] = React.useState<number>(0);
     const goHome = () => {
         router.push('/topic/module/1/topic-a')
     }
@@ -58,8 +58,8 @@ const Navbar = () => {
                         marginLeft: 'auto'
                     }}>
                         <Typography sx={{ color: 'black', marginLeft: 'auto' }}></Typography>
-                        <Box component='span' sx={{ color: 'black', mr: 5 }}>  0% Complete
-                            <ProgressBar bgcolor='#83C124' progress='50' />
+                        <Box component='span' sx={{ color: 'black', mr: 5 }}>  {currentModulePercentage.toFixed()}% Complete
+                            <ProgressBar bgcolor='#83C124' currentModulePercentage={currentModulePercentage} setCurrentModulePercentage={setCurrentModulePercentage} />
                         </Box>
                         <AccountCircleRoundedIcon sx={{ color: '#374651' }} />
                     </Box>
