@@ -17,9 +17,9 @@
   align-items: center;
   text-align: left;
   margin: 5px 0;
-  font-size: 13px;
+  font-size: 12px;
   transition: all 0.25s ease-in;
-  font-weight: 100;
+  font-weight: 300;
 }
 
 .footer_ul li a:hover {
@@ -35,6 +35,31 @@
 
 .footer_image {
   position: absolute;
-  bottom: 0;
+  bottom: -7px;
   right: 0;
+}
+
+.footer_top_btn {
+  background-color: #fff;
+  position: absolute;
+  bottom: 10px;
+  right: 10%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-90deg);
+  border-radius: 50%;
+  z-index: 10;
+  cursor: pointer;
+}
+.footer_top_btn:hover {
+  animation: backtotopbtn 500ms ease-in infinite alternate;
+}
+
+@keyframes backtotopbtn {
+  100% {
+    transform: rotate(-90deg) scale(1.1);
+  }
 }
