@@ -1,12 +1,12 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import { ThemeProvider } from '@mui/material/styles'
-import { theme } from '../theme/theme'
-import { wrapper } from 'redux/store'
-import Navbar from 'components/Navbar'
-import Footer from 'components/Footer'
-import MobileNav from 'components/MobileNav'
-import { useEffect, useState } from 'react'
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "../theme/theme";
+import { wrapper } from "redux/store";
+import Navbar from "components/Navbar";
+import Footer from "components/Footer";
+import MobileNav from "components/MobileNav";
+import { useEffect, useState } from "react";
 function MyApp({ Component, pageProps }: AppProps) {
   const [showChild, setShowChild] = useState(false);
   useEffect(() => {
@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Footer />
         </ThemeProvider>
       </>
-    )
+    );
   }
 }
 

@@ -36,7 +36,7 @@ const ProgressBar = ({
   );
   const router = useRouter();
   const { params } = router.query;
-  console.log(finishedModules);
+  // console.log(finishedModules);
   useEffect(() => {
     if (params) {
       const filteredFinishedModule = finishedModules.find(

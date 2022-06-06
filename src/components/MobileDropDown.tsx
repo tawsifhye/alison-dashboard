@@ -94,8 +94,8 @@ export default function MobileDropDown() {
         </Box>
       </AccordionSummary>
       <AccordionDetails sx={{ padding: 0 }}>
-        {data?.map((module) => (
-          <>
+        {data?.map((module, index) => (
+          <React.Fragment key={index}>
             <Accordion
               key={module.id}
               expanded={expanded === module.id}
@@ -159,7 +159,7 @@ export default function MobileDropDown() {
                 ))}
               </AccordionDetails>
             </Accordion>
-          </>
+          </React.Fragment>
         ))}
       </AccordionDetails>
     </Accordion>
