@@ -107,7 +107,13 @@ const CourseContent = ({ currentModule }: Params) => {
   }, [index, params, currentModule?.submenu]);
 
   return (
-    <Box sx={{ backgroundColor: "", position: "relative" }}>
+    <Box
+      sx={{
+        backgroundColor: "",
+        position: "relative",
+        minHeight: "65vh",
+      }}
+    >
       <Box
         sx={{
           padding: "20px 30px",
@@ -122,7 +128,7 @@ const CourseContent = ({ currentModule }: Params) => {
           alignItems: "center",
           position: "relative",
           background: "#fff",
-          boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+          boxShadow: "0 3px 3px 0 rgb(50 50 50 / 20%)",
           mb: 5,
         }}
       >

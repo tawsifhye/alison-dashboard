@@ -51,7 +51,7 @@ const Footer = () => {
         </Box>
         <Container
           sx={{
-            padding: "20px 0 0 0",
+            padding: "40px 0 0 0",
           }}
         >
           <Grid container spacing={2} sx={{ justifyContent: "center" }}>
