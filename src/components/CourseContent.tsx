@@ -109,9 +109,9 @@ const CourseContent = ({ currentModule }: Params) => {
   return (
     <Box
       sx={{
-        backgroundColor: "",
         position: "relative",
         minHeight: "65vh",
+        zIndex: "1",
       }}
     >
       <Box
@@ -133,21 +133,31 @@ const CourseContent = ({ currentModule }: Params) => {
         }}
       >
         {index ? (
-          <ArrowBackIosNewIcon
-            sx={{ ...Styles.nextPrevArrow, left: "-40px" }}
+          <Box
             onClick={() => goNextPrevious("previous")}
-          />
+            sx={{
+              position: "absolute",
+              background: "#00BCFF",
+              height: "250px",
+              width: "70px",
+              zIndex: "-1",
+              color: "#fff",
+              left: "-50px",
+              fontWeight: "100",
+              borderRadius: "100% 0% 0% 100% / 50% 49% 51% 50%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              cursor: "pointer",
+            }}
+          >
+            <ArrowBackIosNewIcon sx={{ color: "#fff" }} />
+          </Box>
         ) : (
           <></>
         )}
-        {
-          <ReactPlayer
-            url={videoUrl}
-            controls={true}
-            width="100%"
-            height="90%"
-          />
-        }
+        <ReactPlayer url={videoUrl} controls={true} width="100%" height="90%" />
+        {/* this is mobile next prev btn */}
         <Box
           sx={{
             mt: 2,

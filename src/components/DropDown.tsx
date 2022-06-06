@@ -75,8 +75,8 @@ const DropDown = () => {
     fetcher
   );
   const router = useRouter();
-
-  const { params } = router.query;
+  const { params, id } = router.query;
+  console.log(router);
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
   const handleClick = (event: any) => {
@@ -104,6 +104,11 @@ const DropDown = () => {
     setAnchorEl(null);
   };
 
+  useEffect(() => {
+    const filter = data?.find((item) => item.id === id);
+    if (filter) setMenuLabel(filter?.title);
+  }, [data, id, params]);
+
   return (
     <>
       <Button
@@ -126,7 +131,7 @@ const DropDown = () => {
         onClick={handleClick}
         startIcon={<KeyboardArrowDownIcon />}
       >
-        {data && params ? data![parseInt(params![1]) - 1]?.title : menuLabel}
+        {data && params ? data[parseInt(params![1]) - 1]?.title : menuLabel}
       </Button>
       <StyledMenu
         id="demo-customized-menu"
