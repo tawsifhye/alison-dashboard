@@ -132,30 +132,29 @@ const CourseContent = ({ currentModule }: Params) => {
           mb: 5,
         }}
       >
-        {index ? (
-          <Box
-            onClick={() => goNextPrevious("previous")}
-            sx={{
-              position: "absolute",
-              background: "#00BCFF",
-              height: "250px",
-              width: "70px",
-              zIndex: "-1",
-              color: "#fff",
-              left: "-50px",
-              fontWeight: "100",
-              borderRadius: "100% 0% 0% 100% / 50% 49% 51% 50%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              cursor: "pointer",
-            }}
-          >
-            <ArrowBackIosNewIcon sx={{ color: "#fff" }} />
-          </Box>
-        ) : (
-          <></>
-        )}
+        <Box
+          onClick={() => goNextPrevious("previous")}
+          sx={{
+            position: "absolute",
+            height: "250px",
+            width: "70px",
+            zIndex: "-1",
+            color: "#fff",
+            left: "-30px",
+            fontWeight: "100",
+            borderRadius: "76% 26% 26% 76% / 79% 20% 20% 79%",
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            cursor: "pointer",
+            // background: "#BABCBC",
+            background: `${index ? "#00BCFF" : "#BABCBC"}`,
+            pointerEvents: `${index ? "all" : "none"}`,
+          }}
+        >
+          <ArrowBackIosNewIcon sx={{ fontSize: "2rem" }} />
+        </Box>
+
         <ReactPlayer url={videoUrl} controls={true} width="100%" height="90%" />
         {/* this is mobile next prev btn */}
         <Box
@@ -185,10 +184,29 @@ const CourseContent = ({ currentModule }: Params) => {
             Next
           </Button>
         </Box>
-        <ArrowForwardIosIcon
-          sx={{ ...Styles.nextPrevArrow, right: "-40px" }}
+
+        {/* this is desktop next btn */}
+        <Box
           onClick={() => goNextPrevious("next")}
-        />
+          sx={{
+            position: "absolute",
+            background: "#00BCFF",
+            height: "250px",
+            width: "70px",
+            zIndex: "-1",
+            color: "#fff",
+            right: "-30px",
+            fontWeight: "100",
+            borderRadius: "76% 26% 26% 76% / 79% 20% 20% 79%",
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            cursor: "pointer",
+            transform: "scaleX(-1)",
+          }}
+        >
+          <ArrowBackIosNewIcon sx={{ fontSize: "2rem" }} />
+        </Box>
       </Box>
     </Box>
   );
