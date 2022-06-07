@@ -116,8 +116,8 @@ const CourseContent = ({ currentModule }: Params) => {
     >
       <Box
         sx={{
-          padding: "20px 30px",
-          maxWidth: 800,
+          padding: "10px 60px 60px 60px",
+          maxWidth: 850,
           height: 500,
           mx: "auto",
           mt: 15,
@@ -147,7 +147,6 @@ const CourseContent = ({ currentModule }: Params) => {
             justifyContent: "flex-start",
             alignItems: "center",
             cursor: "pointer",
-            // background: "#BABCBC",
             background: `${index ? "#00BCFF" : "#BABCBC"}`,
             pointerEvents: `${index ? "all" : "none"}`,
           }}
