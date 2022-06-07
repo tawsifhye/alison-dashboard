@@ -34,11 +34,11 @@ const Styles = {
   },
 };
 
-interface Params {
+interface Props {
   currentModule?: Data;
 }
 
-const CourseContent = ({ currentModule }: Params) => {
+const CourseContent = ({ currentModule }: Props) => {
   const [index, setIndex] = useState<number>(0);
   const [videoUrl, setVideoUrl] = useState<string>();
   const router = useRouter();
@@ -57,9 +57,12 @@ const CourseContent = ({ currentModule }: Params) => {
       );
       return;
     }
+
     const filteredModule = finishedModules.find(
       (module: FinishedModule) => module.moduleId === currentModule?.id
     );
+    console.log(filteredModule, "filterd module");
+    console.log(finishedModules, "finishedModules module");
 
     if (!filteredModule) {
       const newFinishedModule: any = {
@@ -72,13 +75,23 @@ const CourseContent = ({ currentModule }: Params) => {
       const lessonIndex = finishedModules.findIndex(
         (module: FinishedModule) => module.moduleId === filteredModule.moduleId
       );
-      const newLessonsId = [
-        ...finishedModules[lessonIndex].completedLessonId,
-        currentModule?.submenu[index].id,
-      ];
-      finishedModules[lessonIndex].completedLessonId = newLessonsId;
-      dispatch(getFinishedModules(finishedModules));
+
+      // checking if id is in array or not if not then dispatching and updated progress "Hamim"
+      if (
+        finishedModules[lessonIndex].completedLessonId.indexOf(
+          currentModule?.submenu[index].id
+        ) == -1
+      ) {
+        const newLessonsId = [
+          ...finishedModules[lessonIndex].completedLessonId,
+          currentModule?.submenu[index].id,
+        ];
+        finishedModules[lessonIndex].completedLessonId = newLessonsId;
+        dispatch(getFinishedModules(finishedModules));
+      }
     }
+
+    // push to next route ------------------------------- "Hamim"
     if (currentModule?.submenu[index + 1].type === "video") {
       setIndex(index + 1);
       router.push(

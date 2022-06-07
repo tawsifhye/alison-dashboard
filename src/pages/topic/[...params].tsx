@@ -29,6 +29,9 @@ const Slug = () => {
     dispatch(resetQuiz());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, params && params[2]]);
+
+  // console.log(currentModule, "module ");
+
   return (
     <>
       <CourseContent currentModule={currentModule} />

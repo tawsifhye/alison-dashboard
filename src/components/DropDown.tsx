@@ -76,7 +76,6 @@ const DropDown = () => {
   );
   const router = useRouter();
   const { params, id } = router.query;
-  console.log(router);
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
   const handleClick = (event: any) => {

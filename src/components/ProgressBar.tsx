@@ -29,6 +29,7 @@ const ProgressBar = ({
   const { finishedModules }: any = useSelector(
     (state: State) => state.moduleInfo
   );
+
   const fetcher = (url: any): any => fetch(url).then((res) => res.json());
   const { data, error } = useSWR<Data[]>(
     "https://alison-dashboard.vercel.app/fakeData.json",
