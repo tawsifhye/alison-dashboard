@@ -3,20 +3,23 @@
     "id": "1",
     "title": "Module 1: Preventive Maintenance",
     "moduleCompleted": 0,
+    "isCompleted": false,
     "submenu": [
       {
         "id": "1",
         "type": "video",
         "title": "Topic A",
         "slug": "topic-a",
-        "videoUrl": "https://youtu.be/TsDsE9fePLk"
+        "videoUrl": "https://youtu.be/TsDsE9fePLk",
+        "isCompleted": false
       },
       {
         "id": "2",
         "type": "video",
         "title": "Topic A - Demo 1 -Preventive Maintenance",
         "slug": "topic-a-demo-1-preventive-maintenance",
-        "videoUrl": "https://www.youtube.com/watch?v=cwP1vTqVaR4"
+        "videoUrl": "https://www.youtube.com/watch?v=cwP1vTqVaR4",
+        "isCompleted": false
       },
       {
         "id": "3",
@@ -304,7 +307,8 @@
             "right_answer": "2",
             "level": "advanced"
           }
-        ]
+        ],
+        "isCompleted": false
       }
     ]
   },
@@ -312,20 +316,23 @@
     "id": "2",
     "title": "Module 2: Operating System",
     "moduleCompleted": 0,
+    "isCompleted": false,
     "submenu": [
       {
         "id": "1",
         "type": "video",
         "title": "Topic A:OS",
         "slug": "topic-a-os",
-        "videoUrl": "https://youtu.be/vBURTt97EkA?list=PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O"
+        "videoUrl": "https://youtu.be/vBURTt97EkA?list=PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O",
+        "isCompleted": false
       },
       {
         "id": "2",
         "type": "video",
         "title": "Topic A - Demo 1 -OS Maintenance",
         "slug": "topic-a-demo-1-os-maintenance",
-        "videoUrl": "https://www.youtube.com/watch?v=nZ43misC0s0"
+        "videoUrl": "https://www.youtube.com/watch?v=nZ43misC0s0",
+        "isCompleted": false
       },
       {
         "id": "3",
@@ -613,7 +620,8 @@
             "right_answer": "2",
             "level": "advanced"
           }
-        ]
+        ],
+        "isCompleted": false
       }
     ]
   }

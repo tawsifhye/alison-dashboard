@@ -32,6 +32,7 @@ export interface SubMenu {
   slug: string;
   videoUrl?: string;
   quizzes?: Quiz[];
+  isCompleted?: boolean;
 }
 
 export interface FinishedModule {

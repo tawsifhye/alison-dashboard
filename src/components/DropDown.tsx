@@ -71,7 +71,7 @@ const DropDown = () => {
   const [menuLabel, setMenuLabel] = useState<string>("");
   const fetcher = (url: any): any => fetch(url).then((res) => res.json());
   const { data, error } = useSWR<Data[]>(
-    "https://alison-dashboard.vercel.app/fakeData.json",
+    "https://tawsifhye.github.io/data/alisonmodule.json",
     fetcher
   );
   const router = useRouter();
@@ -107,6 +107,8 @@ const DropDown = () => {
     const filter = data?.find((item) => item.id === id);
     if (filter) setMenuLabel(filter?.title);
   }, [data, id, params]);
+
+  console.log(data, "data");
 
   return (
     <>
