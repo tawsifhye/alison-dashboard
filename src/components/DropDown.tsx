@@ -8,7 +8,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Box } from "@mui/system";
 import { Data } from "interface/interface";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getSelectedModule,
   getSelectedModuleItem,
@@ -16,6 +16,7 @@ import {
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import Styles from "../styles/Navbar.module.css";
+import { State } from "redux/reducers";
 
 const StyledMenu = styled((props: any) => (
   <Menu
@@ -69,11 +70,19 @@ const DropDown = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedMenuId, setSelectedMenuId] = useState<string>("");
   const [menuLabel, setMenuLabel] = useState<string>("");
-  const fetcher = (url: any): any => fetch(url).then((res) => res.json());
-  const { data, error } = useSWR<Data[]>(
-    "https://tawsifhye.github.io/data/alisonmodule.json",
-    fetcher
-  );
+
+  // const fetcher = (url: any): any => fetch(url).then((res) => res.json());
+  // const { data, error } = useSWR<Data[]>(
+  //   "http://localhost:3000/fakeData.json",
+  //   fetcher
+  // );
+
+  const { moduleData }: any = useSelector((state: State) => state.moduleInfo);
+
+  const data: Data[] = moduleData;
+
+  console.log(data);
+
   const router = useRouter();
   const { params, id } = router.query;
   const dispatch = useDispatch();
@@ -107,8 +116,6 @@ const DropDown = () => {
     const filter = data?.find((item) => item.id === id);
     if (filter) setMenuLabel(filter?.title);
   }, [data, id, params]);
-
-  console.log(data, "data");
 
   return (
     <>
@@ -252,8 +259,15 @@ const DropDown = () => {
                       <Box
                         component="span"
                         sx={{
-                          border: "2px solid #e8e8e8",
-                          background: "#f4f5f7",
+                          // border: "2px solid #e8e8e8",
+                          border: `${
+                            menu.isCompleted
+                              ? "2px solid #0295C8"
+                              : "2px solid #e8e8e8"
+                          } `,
+                          background: `${
+                            menu.isCompleted ? "#0295C8" : "#e8e8e8"
+                          } `,
                           width: "20px",
                           height: "20px",
                           display: "inline-block",
@@ -276,8 +290,14 @@ const DropDown = () => {
                             zIndex: 10,
                             width: "1px",
                             height: "15px",
-                            border: "1px solid #e8e8e8",
-                            background: "#f4f5f7",
+                            border: `${
+                              menu.isCompleted
+                                ? "1px solid #0295C8"
+                                : "1px solid #e8e8e8"
+                            } `,
+                            background: `${
+                              menu.isCompleted ? "#0295C8" : "#e8e8e8"
+                            } `,
                           },
                         }}
                       ></Box>

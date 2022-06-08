@@ -139,7 +139,7 @@ const QuizIndex = ({ quiz, setShowResult }: Props) => {
               borderRadius: "30px",
               border: "none",
               maxWidth: "700px",
-              margin: "25px auto ",
+              margin: "20px auto ",
               padding: "20px 20px 10px",
               position: "relative",
               zIndex: 2,
@@ -171,7 +171,7 @@ const QuizIndex = ({ quiz, setShowResult }: Props) => {
                     selectedId === option.id
                       ? "2px solid white"
                       : "2px solid transparent",
-                  marginBottom: "20px",
+                  marginBottom: "15px",
                   color: " #fff",
                   position: "relative",
                   fontSize: "18px",
@@ -266,7 +266,7 @@ const QuizIndex = ({ quiz, setShowResult }: Props) => {
             sx={{
               ...primaryButton,
               marginLeft: "auto",
-              marginTop: "30px",
+              marginTop: "10px",
             }}
             disableRipple
             onClick={index == quizzes.length - 1 ? showQuizResult : goNext}

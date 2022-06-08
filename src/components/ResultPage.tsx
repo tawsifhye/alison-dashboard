@@ -5,7 +5,10 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getFinishedModules } from "redux/actions/moduleAction";
+import {
+  fetchApiModules,
+  getFinishedModules,
+} from "redux/actions/moduleAction";
 import { State } from "redux/reducers";
 import { primaryButton } from "styles/commonStyles";
 
@@ -58,19 +61,26 @@ const ResultPage = ({ setShowReview, setShowResult }: Props) => {
     window.location.reload();
   };
 
+  // --------------------------  "import data from redux 'Hamim' "
+  const modules: any = useSelector((state: State) => state.moduleInfo);
+  const reduxModules = modules.moduleData;
+
   const finishQuiz = () => {
     const filterFinsihedModule = finishedModules.find(
       (module: FinishedModule) => module.moduleId === id
     );
+
     const currentModule = moduleData?.find((data) => data.id === id);
     const index = currentModule?.submenu.findIndex(
       (item) => item.type === "quiz"
     );
+
     if (!filterFinsihedModule && index) {
       const newFinishedModule: any = {
         moduleId: currentModule?.id,
         completedLessonId: [currentModule?.submenu![index].id],
       };
+
       const newArr = [...finishedModules, newFinishedModule];
       dispatch(getFinishedModules(newArr));
     } else {
@@ -78,6 +88,7 @@ const ResultPage = ({ setShowReview, setShowResult }: Props) => {
         (module: FinishedModule) =>
           module.moduleId === filterFinsihedModule.moduleId
       );
+
       if (index) {
         const newLessonsId = [
           ...finishedModules[lessonIndex].completedLessonId,
@@ -87,7 +98,24 @@ const ResultPage = ({ setShowReview, setShowResult }: Props) => {
         dispatch(getFinishedModules(finishedModules));
       }
     }
+
     if (moduleData) {
+      // updated is completed property -------------------------------------- "Hamim"
+      reduxModules?.map((item: any) =>
+        item.submenu.map((obj: any) => {
+          if (obj.type === "quiz") {
+            obj.isCompleted = true;
+
+            if (item.submenu.indexOf(obj) == item.submenu.length - 1) {
+              item.isCompleted = true;
+            }
+          }
+          dispatch(fetchApiModules(reduxModules));
+        })
+      );
+
+      // --------------------------------------------------------
+
       if (moduleIndex === moduleData?.length - 1) {
         router.push(
           `/topic/module/${moduleData[moduleIndex].id}/${moduleData[moduleIndex].submenu[0].slug}`

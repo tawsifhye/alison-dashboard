@@ -8,7 +8,10 @@ import { Data, FinishedModule } from "interface/interface";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "redux/reducers";
-import { getFinishedModules } from "redux/actions/moduleAction";
+import {
+  fetchApiModules,
+  getFinishedModules,
+} from "redux/actions/moduleAction";
 
 const Styles = {
   nextPrevButton: {
@@ -47,6 +50,7 @@ const CourseContent = ({ currentModule }: Props) => {
   const { finishedModules }: any = useSelector(
     (state: State) => state.moduleInfo
   );
+  const { moduleData }: any = useSelector((state: State) => state.moduleInfo);
 
   const goNextPrevious = (type: string) => {
     if (type === "previous") {
@@ -61,8 +65,6 @@ const CourseContent = ({ currentModule }: Props) => {
     const filteredModule = finishedModules.find(
       (module: FinishedModule) => module.moduleId === currentModule?.id
     );
-    console.log(filteredModule, "filterd module");
-    console.log(finishedModules, "finishedModules module");
 
     if (!filteredModule) {
       const newFinishedModule: any = {
@@ -90,6 +92,21 @@ const CourseContent = ({ currentModule }: Props) => {
         dispatch(getFinishedModules(finishedModules));
       }
     }
+
+    // updated is completed property -------------------------------------- "Hamim"
+    moduleData?.map((item: any) =>
+      item.submenu.map((obj: any) => {
+        if (obj.slug === params![2]) {
+          obj.isCompleted = true;
+
+          if (item.submenu.indexOf(obj) == item.submenu.length - 1) {
+            item.isCompleted = true;
+          }
+        }
+      })
+    );
+
+    dispatch(fetchApiModules(moduleData));
 
     // push to next route ------------------------------- "Hamim"
     if (currentModule?.submenu[index + 1].type === "video") {

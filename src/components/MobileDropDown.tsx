@@ -23,7 +23,7 @@ export default function MobileDropDown() {
     useState<number>(0);
   const fetcher = (url: any): any => fetch(url).then((res) => res.json());
   const { data, error } = useSWR<Data[]>(
-    "https://tawsifhye.github.io/data/alisonmodule.json",
+    "http://localhost:3000/fakeData.json",
     fetcher
   );
   const router = useRouter();

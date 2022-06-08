@@ -1,12 +1,14 @@
-import { FinishedModule } from "interface/interface";
+import { Data, FinishedModule } from "interface/interface";
 const initialState: InitialState = {
   moduleResourceIndex: 0,
   finishedModules: [],
+  moduleData: [],
 };
 
 interface InitialState {
   moduleResourceIndex: number;
   finishedModules: FinishedModule[];
+  moduleData: Data[];
 }
 
 interface Action {
@@ -28,19 +30,18 @@ export const moduleReducer = (state = initialState, action: Action) => {
         moduleResourceIndex: action.payload,
       };
     }
-    case "FETCH_API_DATA": {
-      return {
-        ...state,
-        moduleData: action.payload,
-      };
-    }
     case "GET_FINISHED_MODULES": {
       return {
         ...state,
         finishedModules: action.payload,
       };
     }
-
+    case "FETCH_API_DATA": {
+      return {
+        ...state,
+        moduleData: action.payload,
+      };
+    }
     default:
       return state;
   }

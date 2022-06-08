@@ -2,8 +2,10 @@ import CourseContent from "components/CourseContent";
 import { Data } from "interface/interface";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchApiModules } from "redux/actions/moduleAction";
 import { resetQuiz } from "redux/actions/quizAction";
+import { State } from "redux/reducers";
 import useSWR from "swr";
 
 const Slug = () => {
@@ -12,15 +14,15 @@ const Slug = () => {
   const { params } = router.query;
   const fetcher = (url: any): any => fetch(url).then((res) => res.json());
   const { data, error } = useSWR<Data[]>(
-    "https://tawsifhye.github.io/data/alisonmodule.json",
+    "http://localhost:3000/fakeData.json",
     fetcher
   );
   const dispatch = useDispatch();
 
   const filterData = () => {
     if (params) {
-      const moduleData = data?.find((data) => data.id === params[1]);
-      setCurrentModule(moduleData);
+      const modulesData = data?.find((data) => data.id === params[1]);
+      setCurrentModule(modulesData);
     }
   };
 
@@ -30,7 +32,13 @@ const Slug = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, params && params[2]]);
 
-  // console.log(currentModule, "module ");
+  const { moduleData }: any = useSelector((state: State) => state.moduleInfo);
+
+  useEffect(() => {
+    if (data && moduleData.length == 0) {
+      dispatch(fetchApiModules(data));
+    }
+  }, [data]);
 
   return (
     <>

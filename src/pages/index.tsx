@@ -14,7 +14,7 @@ const Home: NextPage = () => {
 export default Home;
 
 export async function getStaticProps() {
-  const res = await fetch("https://tawsifhye.github.io/data/alisonmodule.json");
+  const res = await fetch("http://localhost:3000/fakeData.json");
   const modules: Data[] = await res.json();
   return { props: { modules }, revalidate: 10 };
 }
