@@ -103,7 +103,7 @@ const ResultPage = ({ setShowReview, setShowResult }: Props) => {
       // updated is completed property -------------------------------------- "Hamim"
       reduxModules?.map((item: any) =>
         item.submenu.map((obj: any) => {
-          if (obj.type === "quiz") {
+          if (obj.type === "quiz" && item.id == id) {
             obj.isCompleted = true;
 
             if (item.submenu.indexOf(obj) == item.submenu.length - 1) {

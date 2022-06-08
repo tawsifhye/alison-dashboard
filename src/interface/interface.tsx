@@ -23,6 +23,7 @@ export interface Data {
   id: string;
   title: string;
   submenu: SubMenu[];
+  isCompleted?: boolean;
 }
 
 export interface SubMenu {

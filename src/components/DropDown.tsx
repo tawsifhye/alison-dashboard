@@ -165,7 +165,7 @@ const DropDown = () => {
               component="span"
               sx={{
                 border: "2px solid #e8e8e8",
-                background: "#f4f5f7",
+                background: `${item.isCompleted ? "#0295C8" : "#e8e8e8"} `,
                 width: "20px",
                 height: "20px",
                 display: "inline-block",
@@ -185,8 +185,10 @@ const DropDown = () => {
                   zIndex: 10,
                   width: "1px",
                   height: "15px",
-                  border: "1px solid #e8e8e8",
-                  background: "#f4f5f7",
+                  border: `${
+                    item.isCompleted ? "1px solid #0295C8" : "1px solid #e8e8e8"
+                  } `,
+                  background: `${item.isCompleted ? "#0295C8" : "#e8e8e8"} `,
                 },
               }}
             ></Box>
