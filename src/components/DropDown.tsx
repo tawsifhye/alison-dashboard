@@ -17,6 +17,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import Styles from "../styles/Navbar.module.css";
 import { State } from "redux/reducers";
+import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 
 const StyledMenu = styled((props: any) => (
   <Menu
@@ -160,7 +161,16 @@ const DropDown = () => {
             onClick={() => setAnchorEl(null)}
             disableRipple
           >
-            <Box component="span"></Box>
+            {/* <Box component="span">
+              <CircleOutlinedIcon
+                sx={{
+                  color: "red !important",
+                  display: "inline-block",
+                  mr: "2px !important",
+                }}
+              />
+            </Box> */}
+
             <Box
               component="span"
               sx={{
@@ -171,6 +181,7 @@ const DropDown = () => {
                 display: "inline-block",
                 borderRadius: "100%",
                 margin: "2px 28px 0 0",
+
                 left: "20px",
                 position: "relative",
                 top: "0px",

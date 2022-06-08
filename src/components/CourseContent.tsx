@@ -140,7 +140,6 @@ const CourseContent = ({ currentModule }: Props) => {
     <Box
       sx={{
         position: "relative",
-        minHeight: "65vh",
         zIndex: "1",
       }}
     >
