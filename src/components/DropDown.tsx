@@ -82,8 +82,6 @@ const DropDown = () => {
 
   const data: Data[] = moduleData;
 
-  console.log(data);
-
   const router = useRouter();
   const { params, id } = router.query;
   const dispatch = useDispatch();

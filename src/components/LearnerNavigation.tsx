@@ -1,7 +1,8 @@
 import { Button, Switch, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import emailjs from "@emailjs/browser";
 
 const LearnerNavigation = () => {
   const Styles = {
@@ -55,6 +56,28 @@ const LearnerNavigation = () => {
   };
 
   const [showStudyReminders, setShowStudyReminders] = useState(false);
+
+  const [values, setValues] = useState({
+    to_name: "Hamim",
+    message:
+      "You asked us to remind you to learn on Tuesdays at this hour. Tranform your career by exploring new topics, gaining knowledge, and getting certified. Keep going, youre almost there!",
+    org: "Alison Learning",
+    send_to: "rahmanhamiminfo@gmail.com",
+  });
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    emailjs
+      .send("service_wiazbrr", "template_yp8y50p", values, "xdAX8_wnD6Um5HxoB")
+      .then(
+        (res) => {
+          console.log("success", res);
+        },
+        (error) => {
+          console.log("FAILED", error);
+        }
+      );
+  };
 
   return (
     <>
