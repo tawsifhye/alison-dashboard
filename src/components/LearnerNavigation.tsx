@@ -49,35 +49,122 @@ const LearnerNavigation = () => {
   };
 
   // ----------------
-  const [checked, setChecked] = React.useState(true);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
-  };
 
   const [showStudyReminders, setShowStudyReminders] = useState(false);
 
   const [values, setValues] = useState({
+    send_to: "rahmanhamiminfo@gmail.com",
     to_name: "Hamim",
     message:
       "You asked us to remind you to learn on Tuesdays at this hour. Tranform your career by exploring new topics, gaining knowledge, and getting certified. Keep going, youre almost there!",
     org: "Alison Learning",
-    send_to: "rahmanhamiminfo@gmail.com",
   });
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const sendEmailNotification = () => {
     emailjs
       .send("service_wiazbrr", "template_yp8y50p", values, "xdAX8_wnD6Um5HxoB")
       .then(
         (res) => {
-          console.log("success", res);
+          console.log("SUCCESS", res);
         },
         (error) => {
           console.log("FAILED", error);
         }
       );
   };
+
+  // ------------------ current time calc -------------------
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDate(new Date());
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  const [date, setDate] = useState(new Date());
+
+  let dayNumber = date.getDay();
+  let daylist = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday ",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let currentDay = daylist[dayNumber];
+  let hour = date.getHours();
+  let minute = date.getMinutes();
+  let second = date.getSeconds();
+  let prepand = hour >= 12 ? " PM " : " AM ";
+  hour = hour >= 12 ? hour - 12 : hour;
+  if (hour === 0 && prepand === " PM ") {
+    if (minute === 0 && second === 0) {
+      hour = 12;
+      prepand = " Noon";
+    } else {
+      hour = 12;
+      prepand = " PM";
+    }
+  }
+  if (hour === 0 && prepand === " AM ") {
+    if (minute === 0 && second === 0) {
+      hour = 12;
+      prepand = " Midnight";
+    } else {
+      hour = 12;
+      prepand = " AM";
+    }
+  }
+
+  const currentTime = hour + ":" + minute;
+  // console.log(currentTime);
+  // --------------- current time calc end ---------------------
+
+  // ------------------------- user time setting--------------
+
+  const [checked, setChecked] = React.useState(true);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+  };
+
+  const [userReminderList, setReminderList] = useState([
+    { day: "Sunday", time: "5:00", checked: false },
+    { day: "Monday", time: "5:00", checked: false },
+    { day: "Tuesday", time: "5:00", checked: false },
+    { day: "Wednesday", time: "5:00", checked: false },
+    { day: "Thursday", time: "4:51", checked: false },
+    { day: "Friday", time: "5:00", checked: false },
+    { day: "Saturday", time: "5:00", checked: false },
+  ]);
+
+  const handleReminderList = (day: string, select: boolean) => {
+    userReminderList.map((item) => {
+      if (item.day == day) {
+        item.checked = !item.checked;
+      }
+      setReminderList(userReminderList);
+    });
+  };
+
+  const [isMailSent, setIsMailSent] = useState(false);
+
+  userReminderList.forEach((item) => {
+    if (
+      item.day == currentDay &&
+      item.checked == true &&
+      currentTime == item.time &&
+      isMailSent == false
+    ) {
+      console.log("EMAIL SEND SUCESSFULLY");
+
+      setIsMailSent(true);
+    }
+  });
 
   return (
     <>
@@ -119,23 +206,32 @@ const LearnerNavigation = () => {
                 We will email you at these times to remind you to study.
               </Typography>
             </Box>
-            <Box sx={Styles.remindersDayContainer}>
-              <Box>
-                <Typography sx={{ fontSize: "1rem" }}>Monday</Typography>
-                <Typography sx={{ fontSize: "0.8rem", color: "#a5acb1" }}>
-                  Reminder off
-                </Typography>
+            {userReminderList.map((reminder) => (
+              <Box key={reminder.day} sx={Styles.remindersDayContainer}>
+                <Box>
+                  <Typography sx={{ fontSize: "1rem" }}>
+                    {reminder.day}
+                  </Typography>
+                  <Typography sx={{ fontSize: "0.8rem", color: "#a5acb1" }}>
+                    Reminder off
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography sx={{ textAlign: "center" }}>
+                    {reminder.time} PM
+                  </Typography>
+                  <Switch
+                    size="small"
+                    checked={reminder.checked}
+                    onChange={handleChange}
+                    onClick={() =>
+                      handleReminderList(reminder.day, reminder.checked)
+                    }
+                    inputProps={{ "aria-label": "controlled" }}
+                  />
+                </Box>
               </Box>
-              <Box>
-                <Typography sx={{ textAlign: "center" }}>5am</Typography>
-                <Switch
-                  size="small"
-                  defaultChecked={false}
-                  onChange={handleChange}
-                  inputProps={{ "aria-label": "controlled" }}
-                />
-              </Box>
-            </Box>
+            ))}
           </Box>
         )}
       </Box>

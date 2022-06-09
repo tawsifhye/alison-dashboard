@@ -4,12 +4,12 @@ const nextConfig = {
   redirects: async () => {
     return [
       {
-        source: '/',
-        destination: '/topic/module/1/topic-a',
+        source: "/",
+        destination: "/topic/module/1/topic-a",
         permanent: true,
       },
-    ]
+    ];
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
