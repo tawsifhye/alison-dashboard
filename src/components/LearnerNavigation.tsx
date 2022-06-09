@@ -137,7 +137,7 @@ const LearnerNavigation = () => {
     { day: "Monday", time: "5:00", checked: false },
     { day: "Tuesday", time: "5:00", checked: false },
     { day: "Wednesday", time: "5:00", checked: false },
-    { day: "Thursday", time: "5:17", checked: false },
+    { day: "Thursday", time: "5:40", checked: false },
     { day: "Friday", time: "5:00", checked: false },
     { day: "Saturday", time: "5:00", checked: false },
   ]);
@@ -161,7 +161,7 @@ const LearnerNavigation = () => {
       isMailSent == false
     ) {
       console.log("EMAIL SEND SUCESSFULLY");
-
+      sendEmailNotification();
       setIsMailSent(true);
     }
   });
