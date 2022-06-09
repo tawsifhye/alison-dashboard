@@ -32,7 +32,7 @@ const ProgressBar = ({
 
   const fetcher = (url: any): any => fetch(url).then((res) => res.json());
   const { data, error } = useSWR<Data[]>(
-    "https://alison-dashboard.vercel.app/fakeData.json",
+    "https://alison-dashboard-i24nie5tc-tawsifhye.vercel.app/fakeData.json",
     fetcher
   );
   const router = useRouter();

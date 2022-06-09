@@ -46,7 +46,9 @@ const ModuleQuiz = ({ quiz }: Props) => {
 export default ModuleQuiz;
 
 export async function getStaticPaths() {
-  const res = await fetch("http://localhost:3000/fakeData.json");
+  const res = await fetch(
+    "https://alison-dashboard-i24nie5tc-tawsifhye.vercel.app/fakeData.json"
+  );
   const modules: Data[] = await res.json();
   const paths = modules.map((module) => ({
     params: { id: module.id.toString() },
@@ -55,7 +57,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const res = await fetch("http://localhost:3000/fakeData.json");
+  const res = await fetch(
+    "https://alison-dashboard-i24nie5tc-tawsifhye.vercel.app/fakeData.json"
+  );
   const modules: Data[] = await res.json();
   const moduleData = modules.find(
     (module) => module.id.toString() === params.id

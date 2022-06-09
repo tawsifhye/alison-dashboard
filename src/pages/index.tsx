@@ -14,7 +14,9 @@ const Home: NextPage = () => {
 export default Home;
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:3000/fakeData.json");
+  const res = await fetch(
+    "https://alison-dashboard-i24nie5tc-tawsifhye.vercel.app/fakeData.json"
+  );
   const modules: Data[] = await res.json();
   return { props: { modules }, revalidate: 10 };
 }
