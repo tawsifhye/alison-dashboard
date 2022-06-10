@@ -226,7 +226,7 @@ const CourseContent = ({ currentModule }: Props) => {
             right: "-30px",
             fontWeight: "100",
             borderRadius: "76% 26% 26% 76% / 79% 20% 20% 79%",
-            display: "flex",
+            display: { xs: "none", md: "flex" },
             justifyContent: "flex-start",
             alignItems: "center",
             cursor: "pointer",

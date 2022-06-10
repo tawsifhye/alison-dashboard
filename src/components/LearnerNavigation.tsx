@@ -3,6 +3,8 @@ import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import emailjs from "@emailjs/browser";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 const LearnerNavigation = () => {
   const Styles = {
@@ -95,6 +97,7 @@ const LearnerNavigation = () => {
     "Friday",
     "Saturday",
   ];
+
   let currentDay = daylist[dayNumber];
   let hour = date.getHours();
   let minute = date.getMinutes();
@@ -161,7 +164,7 @@ const LearnerNavigation = () => {
       isMailSent == false
     ) {
       console.log("EMAIL SEND SUCESSFULLY");
-      sendEmailNotification();
+      // sendEmailNotification();
       setIsMailSent(true);
     }
   });
@@ -217,10 +220,43 @@ const LearnerNavigation = () => {
                   </Typography>
                 </Box>
                 <Box>
-                  <Typography sx={{ textAlign: "center" }}>
+                  {/* time */}
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      display: "flex",
+                      alignContent: "center",
+                    }}
+                  >
+                    <Typography component="span">
+                      <AddIcon
+                        sx={{
+                          bgcolor: "#0295C8",
+                          height: "20px",
+                          width: "20px",
+                          color: "#fff",
+                          borderRadius: "50%",
+                          mr: "4px",
+                        }}
+                      />
+                    </Typography>
                     {reminder.time} PM
+                    <Typography component="span">
+                      <AddIcon
+                        sx={{
+                          bgcolor: "#0295C8",
+                          height: "20px",
+                          width: "20px",
+                          color: "#fff",
+                          borderRadius: "50%",
+                          ml: "4px",
+                        }}
+                      />
+                    </Typography>
                   </Typography>
+                  {/* time end */}
                   <Switch
+                    sx={{ mx: "auto", border: "2px solid red" }}
                     size="small"
                     checked={reminder.checked}
                     onChange={handleChange}
