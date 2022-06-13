@@ -102,29 +102,29 @@ const LearnerNavigation = () => {
   let hour = date.getHours();
   let minute = date.getMinutes();
   let second = date.getSeconds();
-  let prepand = hour >= 12 ? " PM " : " AM ";
+  let prepand = hour >= 12 ? "PM" : "AM";
   hour = hour >= 12 ? hour - 12 : hour;
-  if (hour === 0 && prepand === " PM ") {
+  if (hour === 0 && prepand === "PM") {
     if (minute === 0 && second === 0) {
       hour = 12;
-      prepand = " Noon";
+      prepand = "Noon";
     } else {
       hour = 12;
-      prepand = " PM";
+      prepand = "PM";
     }
   }
-  if (hour === 0 && prepand === " AM ") {
+  if (hour === 0 && prepand === "AM") {
     if (minute === 0 && second === 0) {
       hour = 12;
-      prepand = " Midnight";
+      prepand = "Midnight";
     } else {
       hour = 12;
-      prepand = " AM";
+      prepand = "AM";
     }
   }
 
   const currentTime = hour + ":" + minute;
-  // console.log(currentTime);
+
   // --------------- current time calc end ---------------------
 
   // ------------------------- user time setting--------------
@@ -136,13 +136,13 @@ const LearnerNavigation = () => {
   };
 
   const [userReminderList, setReminderList] = useState([
-    { day: "Sunday", time: "5:00", checked: false },
-    { day: "Monday", time: "5:00", checked: false },
-    { day: "Tuesday", time: "5:00", checked: false },
-    { day: "Wednesday", time: "5:00", checked: false },
-    { day: "Thursday", time: "5:40", checked: false },
-    { day: "Friday", time: "5:00", checked: false },
-    { day: "Saturday", time: "5:00", checked: false },
+    { day: "Sunday", time: "6", meridiem: "PM", checked: false },
+    { day: "Monday", time: "6", meridiem: "PM", checked: false },
+    { day: "Tuesday", time: "6", meridiem: "PM", checked: false },
+    { day: "Wednesday", time: "6", meridiem: "PM", checked: false },
+    { day: "Thursday", time: "6", meridiem: "PM", checked: false },
+    { day: "Friday", time: "6", meridiem: "PM", checked: false },
+    { day: "Saturday", time: "6", meridiem: "PM", checked: false },
   ]);
 
   const handleReminderList = (day: string, select: boolean) => {
@@ -154,17 +154,55 @@ const LearnerNavigation = () => {
     });
   };
 
+  //  plus minus btn
+  const handleTimePlus = (day: string) => {
+    userReminderList.map((item) => {
+      if (item.day === day) {
+        if (item.time == "11") {
+          item.meridiem = item.meridiem == "PM" ? "AM" : "PM";
+        }
+
+        if (item.time == "12") {
+          item.time = "1";
+        } else {
+          let time = Number(item.time) + 1;
+          item.time = time.toString();
+        }
+      }
+    });
+    console.log(userReminderList);
+  };
+  const handleTimeMinus = (day: string) => {
+    userReminderList.map((item) => {
+      if (item.day === day) {
+        if (item.time == "12") {
+          item.meridiem = item.meridiem == "PM" ? "AM" : "PM";
+        }
+
+        if (item.time == "1") {
+          item.time = "12";
+        } else {
+          let time = Number(item.time) - 1;
+          item.time = time.toString();
+        }
+      }
+    });
+  };
+
   const [isMailSent, setIsMailSent] = useState(false);
 
   userReminderList.forEach((item) => {
+    // console.log(item.meridiem, prepand);
+
     if (
       item.day == currentDay &&
       item.checked == true &&
-      currentTime == item.time &&
+      currentTime[0] == item.time &&
+      item.meridiem == prepand &&
       isMailSent == false
     ) {
       console.log("EMAIL SEND SUCESSFULLY");
-      // sendEmailNotification();
+      sendEmailNotification();
       setIsMailSent(true);
     }
   });
@@ -219,17 +257,27 @@ const LearnerNavigation = () => {
                     Reminder off
                   </Typography>
                 </Box>
-                <Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
                   {/* time */}
                   <Typography
                     sx={{
                       textAlign: "center",
                       display: "flex",
                       alignContent: "center",
+                      "&:hover": {
+                        "*": {
+                          opacity: "1",
+                        },
+                      },
                     }}
                   >
                     <Typography component="span">
-                      <AddIcon
+                      <RemoveIcon
                         sx={{
                           bgcolor: "#0295C8",
                           height: "20px",
@@ -237,10 +285,14 @@ const LearnerNavigation = () => {
                           color: "#fff",
                           borderRadius: "50%",
                           mr: "4px",
+                          cursor: "pointer",
+                          // opacity: "0",
+                          transition: "opacity 300ms",
                         }}
+                        onClick={() => handleTimeMinus(reminder.day)}
                       />
                     </Typography>
-                    {reminder.time} PM
+                    {reminder.time}:00 {reminder.meridiem}
                     <Typography component="span">
                       <AddIcon
                         sx={{
@@ -250,13 +302,19 @@ const LearnerNavigation = () => {
                           color: "#fff",
                           borderRadius: "50%",
                           ml: "4px",
+                          cursor: "pointer",
+                          // opacity: "0",
+                          transition: "opacity 300ms",
                         }}
+                        onClick={() => handleTimePlus(reminder.day)}
                       />
                     </Typography>
                   </Typography>
                   {/* time end */}
                   <Switch
-                    sx={{ mx: "auto", border: "2px solid red" }}
+                    sx={{
+                      mx: "auto",
+                    }}
                     size="small"
                     checked={reminder.checked}
                     onChange={handleChange}
