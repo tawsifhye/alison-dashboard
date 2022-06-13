@@ -286,7 +286,7 @@ const LearnerNavigation = () => {
                           borderRadius: "50%",
                           mr: "4px",
                           cursor: "pointer",
-                          // opacity: "0",
+                          opacity: "0",
                           transition: "opacity 300ms",
                         }}
                         onClick={() => handleTimeMinus(reminder.day)}
@@ -303,7 +303,7 @@ const LearnerNavigation = () => {
                           borderRadius: "50%",
                           ml: "4px",
                           cursor: "pointer",
-                          // opacity: "0",
+                          opacity: "0",
                           transition: "opacity 300ms",
                         }}
                         onClick={() => handleTimePlus(reminder.day)}
