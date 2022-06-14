@@ -214,7 +214,7 @@ const DropDown = () => {
                   boxShadow: "0 3px 8px 0 rgb(50 50 50 / 20%)",
                   "@media screen and (min-width: 1810px) and (max-width: 1861px)":
                     {
-                      left: "650px",
+                      left: "660px",
                     },
                   "@media screen and (min-width: 1762px) and  (max-width: 1809px)":
                     {
