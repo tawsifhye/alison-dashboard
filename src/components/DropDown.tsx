@@ -14,10 +14,8 @@ import {
   getSelectedModuleItem,
 } from "redux/actions/moduleAction";
 import { useRouter } from "next/router";
-import useSWR from "swr";
 import Styles from "../styles/Navbar.module.css";
 import { State } from "redux/reducers";
-import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 
 const StyledMenu = styled((props: any) => (
   <Menu
@@ -71,12 +69,6 @@ const DropDown = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedMenuId, setSelectedMenuId] = useState<string>("");
   const [menuLabel, setMenuLabel] = useState<string>("");
-
-  // const fetcher = (url: any): any => fetch(url).then((res) => res.json());
-  // const { data, error } = useSWR<Data[]>(
-  //   "https://alison-dashboard-i24nie5tc-tawsifhye.vercel.app/fakeData.json",
-  //   fetcher
-  // );
 
   const { moduleData }: any = useSelector((state: State) => state.moduleInfo);
 
@@ -159,16 +151,6 @@ const DropDown = () => {
             onClick={() => setAnchorEl(null)}
             disableRipple
           >
-            {/* <Box component="span">
-              <CircleOutlinedIcon
-                sx={{
-                  color: "red !important",
-                  display: "inline-block",
-                  mr: "2px !important",
-                }}
-              />
-            </Box> */}
-
             <Box
               component="span"
               sx={{
