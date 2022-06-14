@@ -16,6 +16,8 @@ import {
 import { useRouter } from "next/router";
 import Styles from "../styles/Navbar.module.css";
 import { State } from "redux/reducers";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 
 const StyledMenu = styled((props: any) => (
   <Menu
@@ -144,7 +146,7 @@ const DropDown = () => {
         {data?.map((item, index) => (
           <MenuItem
             key={item.title}
-            sx={{ width: "100%" }}
+            sx={{ width: "100%", py: 2 }}
             component="div"
             onMouseOver={() => showSubMenu(item.id)}
             onMouseLeave={() => showSubMenu("")}
@@ -152,43 +154,49 @@ const DropDown = () => {
             disableRipple
           >
             <Box
-              component="span"
               sx={{
-                border: "2px solid #e8e8e8",
-                background: `${item.isCompleted ? "#0295C8" : "#e8e8e8"} `,
-                width: "20px",
-                height: "20px",
-                display: "inline-block",
-                borderRadius: "100%",
-                margin: "2px 28px 0 0",
-
-                left: "20px",
                 position: "relative",
-                top: "0px",
-                transition: "all .3s ease-in",
                 "&:before": {
                   content: "''",
                   position: "absolute",
+                  height: "50px",
+                  width: "2px",
+                  bgcolor: ` ${item.isCompleted ? "#0295C8" : "#E8E8E8"}`,
                   left: "50%",
                   transform: "translateX(-50%)",
-                  bottom: "-110%",
+                  top: "27px",
                   display: index === data.length - 1 ? "none" : "inline-block",
-                  zIndex: 10,
-                  width: "1px",
-                  height: "15px",
-                  border: `${
-                    item.isCompleted ? "1px solid #0295C8" : "1px solid #e8e8e8"
-                  } `,
-                  background: `${item.isCompleted ? "#0295C8" : "#e8e8e8"} `,
                 },
               }}
-            ></Box>
+            >
+              {item.isCompleted ? (
+                <CheckCircleIcon
+                  sx={{
+                    mx: "5px !important",
+                    mt: "7px !important",
+                    fontSize: "1.4rem !important",
+                    color: "#0295C8 !important",
+                  }}
+                />
+              ) : (
+                <CircleOutlinedIcon
+                  sx={{
+                    mx: "5px !important",
+                    mt: "7px !important",
+                    fontSize: "1.4rem !important",
+                    color: "#E8E8E8 !important",
+                  }}
+                />
+              )}
+            </Box>
+
             <Link
               key={item.id}
               href={`/topic/module/${item.id}/${item.submenu[0].slug}`}
             >
               {item.title}
             </Link>
+
             <ChevronRightIcon />
             {item.id === selectedMenuId && (
               <Box
@@ -240,6 +248,7 @@ const DropDown = () => {
                     }
                   >
                     <MenuItem
+                      sx={{ py: 2 }}
                       onClick={() =>
                         getSelectedModuleId(
                           item.title,
@@ -250,50 +259,46 @@ const DropDown = () => {
                       }
                     >
                       <Box
-                        component="span"
                         sx={{
-                          // border: "2px solid #e8e8e8",
-                          border: `${
-                            menu.isCompleted
-                              ? "2px solid #0295C8"
-                              : "2px solid #e8e8e8"
-                          } `,
-                          background: `${
-                            menu.isCompleted ? "#0295C8" : "#e8e8e8"
-                          } `,
-                          width: "20px",
-                          height: "20px",
-                          display: "inline-block",
-                          borderRadius: "100%",
-                          margin: "2px 28px 0 0",
-                          left: "20px",
                           position: "relative",
-                          top: "0px",
-                          transition: "all .3s ease-in",
                           "&:before": {
                             content: "''",
                             position: "absolute",
+                            height: "50px",
+                            width: "2px",
+                            bgcolor: ` ${
+                              item.isCompleted ? "#0295C8" : "#E8E8E8"
+                            }`,
                             left: "50%",
                             transform: "translateX(-50%)",
-                            bottom: "-110%",
+                            top: "27px",
                             display:
                               index === item.submenu.length - 1
                                 ? "none"
                                 : "inline-block",
-                            zIndex: 10,
-                            width: "1px",
-                            height: "15px",
-                            border: `${
-                              menu.isCompleted
-                                ? "1px solid #0295C8"
-                                : "1px solid #e8e8e8"
-                            } `,
-                            background: `${
-                              menu.isCompleted ? "#0295C8" : "#e8e8e8"
-                            } `,
                           },
                         }}
-                      ></Box>
+                      >
+                        {menu.isCompleted ? (
+                          <CheckCircleIcon
+                            sx={{
+                              mx: "5px !important",
+                              mt: "7px !important",
+                              fontSize: "1.4rem !important",
+                              color: "#0295C8 !important",
+                            }}
+                          />
+                        ) : (
+                          <CircleOutlinedIcon
+                            sx={{
+                              mx: "5px !important",
+                              mt: "7px !important",
+                              fontSize: "1.4rem !important",
+                              color: "#E8E8E8 !important",
+                            }}
+                          />
+                        )}
+                      </Box>
                       {menu.title}
                     </MenuItem>
                   </Link>
