@@ -267,7 +267,7 @@ const DropDown = () => {
                             height: "50px",
                             width: "2px",
                             bgcolor: ` ${
-                              item.isCompleted ? "#0295C8" : "#E8E8E8"
+                              menu.isCompleted ? "#0295C8" : "#E8E8E8"
                             }`,
                             left: "50%",
                             transform: "translateX(-50%)",
