@@ -197,7 +197,7 @@ const DropDown = () => {
               {item.title}
             </Link>
 
-            <ChevronRightIcon />
+            <ChevronRightIcon sx={{ mx: "5px !important" }} />
             {item.id === selectedMenuId && (
               <Box
                 sx={{
