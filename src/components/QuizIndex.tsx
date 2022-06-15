@@ -68,6 +68,10 @@ const QuizIndex = ({ quiz, setShowResult }: Props) => {
     setSelectedId("");
     setIsSubmitted(false);
     setIndex(index + 1);
+
+    if (index > 2) {
+      setLastBarProgress((pervState) => pervState + lastProgressIncrement);
+    }
   };
 
   const showQuizResult = () => {
@@ -76,6 +80,13 @@ const QuizIndex = ({ quiz, setShowResult }: Props) => {
     }
   };
 
+  // ----------------- progress bar ----------------
+
+  const remainingQuizs = quizzes.length - 3;
+  const lastProgressIncrement = 100 / remainingQuizs;
+
+  const [lastBarProgress, setLastBarProgress] = useState(0);
+  console.log({ lastBarProgress });
   return (
     <>
       <Typography
@@ -148,7 +159,7 @@ const QuizIndex = ({ quiz, setShowResult }: Props) => {
               width: `${index >= 1 ? "25%" : "0%"}`,
               height: "5px",
               bgcolor: "#00A950",
-              transition: "width 1s",
+              transition: "width 1000ms cubic-bezier(.89,.68,0,1.07)",
             }}
           ></Box>
           <Box
@@ -156,7 +167,7 @@ const QuizIndex = ({ quiz, setShowResult }: Props) => {
               width: `${index >= 2 ? "25%" : "0%"}`,
               height: "5px",
               bgcolor: "#00A950",
-              transition: "width 1s",
+              transition: "width 1000ms cubic-bezier(.89,.68,0,1.07)",
             }}
           ></Box>
           <Box
@@ -164,17 +175,27 @@ const QuizIndex = ({ quiz, setShowResult }: Props) => {
               width: `${index >= 3 ? "25%" : "0%"}`,
               height: "5px",
               bgcolor: "#00A950",
-              transition: "width 1s",
+              transition: "width 1000ms cubic-bezier(.89,.68,0,1.07)",
             }}
           ></Box>
           <Box
             sx={{
               width: `${index >= 4 ? "25%" : "0%"}`,
               height: "5px",
-              bgcolor: "#00A950",
-              transition: "width 1s",
+              transition: "width 1000ms cubic-bezier(.89,.68,0,1.07)",
             }}
-          ></Box>
+          >
+            <Box
+              sx={{
+                display: `${index >= 4 ? "block" : "none"}`,
+                width: `${lastBarProgress}%`,
+                height: "5px",
+                bgcolor: `${lastBarProgress > 98 ? "#00A950" : "#F99D26"}`,
+                transition: "width 1000ms cubic-bezier(.89,.68,0,1.07)",
+                position: "relative !important",
+              }}
+            ></Box>
+          </Box>
         </Box>
         <Typography variant="body2" sx={{ color: "#1d232e" }}>
           Question {quizzes.length} / {index}
