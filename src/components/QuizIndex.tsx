@@ -94,6 +94,94 @@ const QuizIndex = ({ quiz, setShowResult }: Props) => {
 
         {index > 4 && "You’re halfway there, keep going!"}
       </Typography>
+      {/* ---------------- progress start ------------------ */}
+      <Box
+        sx={{
+          minWidth: 275,
+          maxWidth: 800,
+          mx: "auto",
+          mt: 5,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <Box
+          sx={{
+            height: "5px",
+            width: "80%",
+            mr: 2,
+            bgcolor: "#fff",
+            boxShadow: "0 2px 5px 0 rgb(50 50 50 / 20%)",
+            display: "flex",
+            position: "relative",
+          }}
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              width: "25%",
+              height: "5px",
+              display: "flex",
+              borderRight: "8px solid #B5B5B5",
+            }}
+          ></Box>
+          <Box
+            sx={{
+              position: "absolute",
+              width: "50%",
+              height: "5px",
+              display: "flex",
+              borderRight: "8px solid #B5B5B5",
+            }}
+          ></Box>
+          <Box
+            sx={{
+              position: "absolute",
+              width: "75%",
+              height: "5px",
+              display: "flex",
+              borderRight: "8px solid #B5B5B5",
+            }}
+          ></Box>
+          <Box
+            sx={{
+              width: `${index >= 1 ? "25%" : "0%"}`,
+              height: "5px",
+              bgcolor: "#00A950",
+              transition: "width 1s",
+            }}
+          ></Box>
+          <Box
+            sx={{
+              width: `${index >= 2 ? "25%" : "0%"}`,
+              height: "5px",
+              bgcolor: "#00A950",
+              transition: "width 1s",
+            }}
+          ></Box>
+          <Box
+            sx={{
+              width: `${index >= 3 ? "25%" : "0%"}`,
+              height: "5px",
+              bgcolor: "#00A950",
+              transition: "width 1s",
+            }}
+          ></Box>
+          <Box
+            sx={{
+              width: `${index >= 4 ? "25%" : "0%"}`,
+              height: "5px",
+              bgcolor: "#00A950",
+              transition: "width 1s",
+            }}
+          ></Box>
+        </Box>
+        <Typography variant="body2" sx={{ color: "#1d232e" }}>
+          Question {quizzes.length} / {index}
+        </Typography>
+      </Box>
+
+      {/* ---------------- progress end ------------------ */}
       <Box
         sx={{
           minWidth: 275,
@@ -107,6 +195,7 @@ const QuizIndex = ({ quiz, setShowResult }: Props) => {
           marginTop: 5,
           boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
           mb: 5,
+          mt: 2,
         }}
       >
         <Box
